@@ -10,6 +10,8 @@
  */
 angular
   .module('frontendApp', [
+    'angulartics',
+    'angulartics.google.analytics',
     'ngAnimate',
     'ngCookies',
     'ngResource',
