@@ -10,6 +10,7 @@
  */
 angular
   .module('frontendApp', [
+    'mm.foundation',
     'angulartics',
     'angulartics.google.analytics',
     'ngAnimate',

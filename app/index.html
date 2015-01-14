@@ -26,6 +26,7 @@
 
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/foundation/css/foundation.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -39,10 +40,63 @@
 
     <!-- Add your site or application content here -->
 
-    <div class="container">
-        <div>
-    	
-        </div>
+
+    <div ng-controller="NavCtrl">
+      <top-bar>
+        <ul class="title-area">
+          <li class="name">
+            <h1><a href="#">Synergy Maps</a></h1>
+          </li>
+          <li toggle-top-bar class="menu-icon"><a href="#">Menu</a></li>
+        </ul>
+
+        <top-bar-section>
+          <!-- Right Nav Section -->
+          <ul class="right">
+            <li has-dropdown>
+              <a href="#">Representation</a>
+              <ul top-bar-dropdown>
+                <li ng-class="{{alf.class}}" ng-repeat="alf in [{class: {'active': true},'text':'Gene Expression'}, {class: {'active': false},'text':'Physicochemical'}, {class: {'active': false},'text':'Structural'}, {class: {'active': false},'text':'Biological'}]">
+                    <a href="#">{{alf.text}}</a>
+                </li>
+              </ul>
+            </li>
+            <li has-dropdown>
+              <a href="#">Reduction Technique</a>
+              <ul top-bar-dropdown>
+                <li ng-repeat="alf in ['t-SNE', 'MDS', 'PCA']">
+                    <a href="#">{{alf}}</a>
+                </li>
+              </ul>
+            </li>
+            <li has-dropdown>
+              <a href="#">Synergy Type</a>
+              <ul top-bar-dropdown>
+                <li ng-repeat="alf in ['pGamma', 'Median Excess', 'Highest HSA', 'Excess over Bliss']">
+                    <a href="#">{{alf}}</a>
+                </li>
+              </ul>
+            </li>
+            <li has-dropdown>
+              <a href="#">Activity Type</a>
+              <ul top-bar-dropdown>
+                <li ng-repeat="alf in ['pKi', 'pKd', 'IC50']">
+                    <a href="#">{{alf}}</a>
+                </li>
+              </ul>
+            </li>
+            <li class="has-form">
+              <input type="text" placeholder="Search">
+            </li>
+            <li>
+                <a href="#">Settings</a>
+            </li>
+          </ul>
+        </top-bar-section>
+      </top-bar>
+
+    <svg></svg>     
+      
     </div>
 
     <div>© Rich Lewis 2015</div>
@@ -71,6 +125,7 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="bower_components/modernizr/modernizr.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -98,13 +153,17 @@
     <script src="bower_components/angulartics/src/angulartics-woopra.js"></script>
     <script src="bower_components/angulartics/src/angulartics-marketo.js"></script>
     <script src="bower_components/angulartics/src/angulartics-intercom.js"></script>
+    <script src="bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
+    <script src="bower_components/jquery-placeholder/jquery.placeholder.js"></script>
+    <script src="bower_components/angular-foundation/mm-foundation-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/nav.js"></script>
         <!-- endbuild -->
 </body>
 </html>
