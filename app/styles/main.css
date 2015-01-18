@@ -1,0 +1,40 @@
+html, body {
+    height: 100%;
+    margin: 0px;
+}
+
+#wrapper:before {
+    content:'';
+    float: left;
+    height: 100%;
+}
+#wrapper {
+    height: 100%;
+    background-color: black;
+    color: white;
+}
+#header {
+    background-color:#000;
+}
+#content {
+    background-color: #DDDDDD;
+}
+#content:after {
+    content:'';
+    display: block;
+    clear: both;
+}
+
+.top-bar, .top-bar-section li:not(.has-form) a:not(.button), .top-bar-section .has-form, .top-bar-section .dropdown li:not(.has-form):not(.active) > a:not(.button) {
+  background: #444;
+}
+
+.cp {
+  padding: 1em 1em 1em 1em;
+}
+
+table.color-settings tbody tr {
+  background: none;
+}
+
+

@@ -27,6 +27,8 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/foundation/css/foundation.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/angular-foundation-colorpicker/css/colorpicker.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -40,68 +42,68 @@
 
     <!-- Add your site or application content here -->
 
+    <div id="wrapper">
 
-    <div ng-controller="NavCtrl">
-      <top-bar>
-        <ul class="title-area">
-          <li class="name">
-            <h1><a href="#">Synergy Maps</a></h1>
-          </li>
-          <li toggle-top-bar class="menu-icon"><a href="#">Menu</a></li>
-        </ul>
+        <div id="nav" ng-controller="NavCtrl">
+          <top-bar is-hover>
+            <ul class="left">
+              <li class="name">
+                <h1><a href="#">Synergy Maps</a></h1>
+              </li>
+              <li toggle-top-bar class="menu-icon"><a href="#">Menu</a></li>
+            </ul>
 
-        <top-bar-section>
-          <!-- Right Nav Section -->
-          <ul class="right">
-            <li has-dropdown>
-              <a href="#">Representation</a>
-              <ul top-bar-dropdown>
-                <li ng-class="{{alf.class}}" ng-repeat="alf in [{class: {'active': true},'text':'Gene Expression'}, {class: {'active': false},'text':'Physicochemical'}, {class: {'active': false},'text':'Structural'}, {class: {'active': false},'text':'Biological'}]">
-                    <a href="#">{{alf.text}}</a>
+            <top-bar-section>
+              <!-- Right Nav Section -->
+              <ul class="right">
+                <li has-dropdown>
+                  <a href="#">{{currentRep}}</a>
+                  <ul top-bar-dropdown>
+                    <li ng-class="{{rep.class}}" ng-repeat="rep in representations">
+                        <a href="#">{{rep.name}}</a>
+                    </li>
+                  </ul>
+                </li>
+                <li has-dropdown>
+                  <a href="#">{{currentRed}}</a>
+                  <ul top-bar-dropdown>
+                    <li ng-class="{{redTech.class}}" ng-repeat="redTech in reductionTechs">
+                        <a href="#">{{redTech.name}}</a>
+                    </li>
+                  </ul>
+                </li>
+                <li has-dropdown>
+                  <a href="#">{{currentSyn}}</a>
+                  <ul top-bar-dropdown>
+                    <li ng-class="{{syn.class}}" ng-repeat="syn in synergyTypes">
+                        <a href="#">{{syn.name}}</a>
+                    </li>
+                  </ul>
+                </li>
+                <li has-dropdown>
+                  <a href="#">{{currentAct}}</a>
+                  <ul top-bar-dropdown>
+                    <li ng-class="{{activity.class}}" ng-repeat="activity in activityTypes"|>
+                        <a href="#">{{activity.name}}</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="has-form">
+                  <input type="text" ng-model="currentSearch" placeholder="Search">
+                </li>
+                <li>
+                    <a href="#" ng-click="openSettings()"><fa name="cog"></fa> Settings</a>
                 </li>
               </ul>
-            </li>
-            <li has-dropdown>
-              <a href="#">Reduction Technique</a>
-              <ul top-bar-dropdown>
-                <li ng-repeat="alf in ['t-SNE', 'MDS', 'PCA']">
-                    <a href="#">{{alf}}</a>
-                </li>
-              </ul>
-            </li>
-            <li has-dropdown>
-              <a href="#">Synergy Type</a>
-              <ul top-bar-dropdown>
-                <li ng-repeat="alf in ['pGamma', 'Median Excess', 'Highest HSA', 'Excess over Bliss']">
-                    <a href="#">{{alf}}</a>
-                </li>
-              </ul>
-            </li>
-            <li has-dropdown>
-              <a href="#">Activity Type</a>
-              <ul top-bar-dropdown>
-                <li ng-repeat="alf in ['pKi', 'pKd', 'IC50']">
-                    <a href="#">{{alf}}</a>
-                </li>
-              </ul>
-            </li>
-            <li class="has-form">
-              <input type="text" placeholder="Search">
-            </li>
-            <li>
-                <a href="#">Settings</a>
-            </li>
-          </ul>
-        </top-bar-section>
-      </top-bar>
+            </top-bar-section>
+          </top-bar>   
+        </div>
 
-    <svg></svg>     
-      
+        <div id="content">
+
+        </div>
+
     </div>
-
-    <div>© Rich Lewis 2015</div>
-
-
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -110,10 +112,10 @@
        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
  
        ga("create", "UA-56872202-1");
-
+       
        //ga("send", "pageview");
        //functionality replaced by angulartics
-       
+ 
     </script>
 
     <!-- build:js(.) scripts/oldieshim.js -->
@@ -156,7 +158,11 @@
     <script src="bower_components/fastclick/lib/fastclick.js"></script>
     <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
     <script src="bower_components/jquery-placeholder/jquery.placeholder.js"></script>
+    <script src="bower_components/foundation/js/foundation.js"></script>
     <script src="bower_components/angular-foundation/mm-foundation-tpls.js"></script>
+    <script src="bower_components/angular-fontawesome/dist/angular-fontawesome.js"></script>
+    <script src="bower_components/angular-foundation-colorpicker/js/foundation-colorpicker-module.js"></script>
+    <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -164,6 +170,10 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/nav.js"></script>
+        <script src="scripts/controllers/settings.js"></script>
+        <script src="scripts/services/settings.js"></script>
+        <script src="scripts/services/data.js"></script>
+        <script src="scripts/directives/synergymap.js"></script>
         <!-- endbuild -->
 </body>
 </html>

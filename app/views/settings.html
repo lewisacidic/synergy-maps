@@ -1,0 +1,30 @@
+<h3>Settings</h3>
+<table class="color-settings">
+  <thead></thead>
+  <tbody>
+    <tr>
+      <td>
+        <div class="cp" colorpicker ng-model="synergyColor" style="background-color: {{synergyColor}}"></div>
+      </td>
+      <td>
+        Synergy
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="cp" colorpicker ng-model="antagonismColor" style="background-color: {{antagonismColor}}"></div>
+      </td>
+      <td>
+        Antagonism
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button ng-click="reset()">Reset</button>
+
+Synergy: {{synergyColor}}
+
+Antagonism: {{antagonismColor}}
+
+            <div class="square" style="background: red;"></div><div class="square" style="background: blue;"></div><div class="square" style="background: green;"></div><div class="square" style="background: yellow;"></div>

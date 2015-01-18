@@ -10,6 +10,8 @@
  */
 angular
   .module('frontendApp', [
+    'colorpicker.module',
+    'picardy.fontawesome',
     'mm.foundation',
     'angulartics',
     'angulartics.google.analytics',
