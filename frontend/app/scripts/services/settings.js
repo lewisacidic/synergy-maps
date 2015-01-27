@@ -9,5 +9,12 @@
  */
 angular.module('frontendApp')
   .service('settings', function () {
-    // AngularJS will instantiate a singleton by calling "new" on this function
+
+    this.defaultColors = {
+        synergyColor: '#0000FF',
+        antagonismColor: '#FF0000'};
+
+
+    this.colors = $.extend(true, {}, this.defaultColors);
+
   });

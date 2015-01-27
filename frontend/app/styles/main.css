@@ -3,6 +3,11 @@ html, body {
     margin: 0px;
 }
 
+.top-bar .name h1 {
+  font-size: 20px;
+  font-weight: bolder;
+  
+}
 #wrapper:before {
     content:'';
     float: left;
@@ -18,6 +23,7 @@ html, body {
 }
 #content {
     background-color: #DDDDDD;
+    display: relative;
 }
 #content:after {
     content:'';
@@ -25,16 +31,127 @@ html, body {
     clear: both;
 }
 
+.has-form {
+    padding: 5px 0 5px 0;
+}
+
+.has-form ul li {
+  float: none;
+  color: black;
+  background: none;
+}
+
+/* nav bar */
 .top-bar, .top-bar-section li:not(.has-form) a:not(.button), .top-bar-section .has-form, .top-bar-section .dropdown li:not(.has-form):not(.active) > a:not(.button) {
   background: #444;
 }
 
+.dropdown-type {
+  opacity: 0.75;
+  font-weight: lighter;
+  padding: .85em 0 0.5em 0;
+  line-height: 0.8125em;
+  font-size: 0.8125em;
+}
+
+.dropdown-value {
+  line-height: 1.0em;
+  padding-bottom: 0.75em;
+}
+
+/* typeahead list */
+
+.has-form li:not(.has-form) a:not(.button), .has-form .dropdown {
+  color: black;
+  background: none;
+}
+
+/* active typeahead*/
+
+/*
+
+.has-form li.active:not(.has-form) a:not(.button), .has-form li:not(.has-form):hover a:not(.button):hover, .has-form .dropdown {
+  color: white;
+  background: blue;
+}
+
+*/
 .cp {
   padding: 1em 1em 1em 1em;
 }
 
+
+.top-bar {
+    z-index: 100;
+}
+
+/* settings modal */
+
 table.color-settings tbody tr {
   background: none;
 }
+
+.dismiss {
+    opacity: 0.5;
+    transition: opacity 0.25s;
+    -webkit-transition: opacity 0.25s;
+    -moz-transition: opacity 0.25s;
+    -o-transition: opacity 0.25s;
+}
+
+.dismiss:hover {
+    opacity: 1.0;
+}
+
+
+svg.synergy-map {
+ position: absolute; 
+ height: 100%; 
+ width: 100%; 
+ left: 0; 
+ top: 45px;  /*top-bar width*/
+}
+
+.magnifying-glass {
+  position: absolute;
+  z-index:2;
+  margin-left: 5px;
+  margin-top: 15px;
+  color: #CCC;
+}
+
+input[type="text"].dream-search {
+  width: 12em;
+  padding-left: 2em;
+}
+
+ul[typeahead-popup] {
+  z-index: 30;
+}
+
+
+@media only screen and (max-width: 40.063em) { 
+
+    .magnifying-glass {
+
+      margin-top: 6px;
+
+    }
+
+    input[type="text"].dream-search {
+      width: 100%;
+
+    }
+
+    input[type="text"].dream-search:focus {
+      width: 100%;
+
+    }
+}
+
+label {
+    color: white;
+}
+
 
 

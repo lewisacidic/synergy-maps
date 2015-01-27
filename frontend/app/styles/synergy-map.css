@@ -1,0 +1,51 @@
+
+
+circle.compound {
+    stroke-width: 1px;
+    stroke: #DDDDDD;
+    fill: #888888;
+    opacity: 1.0;
+}
+
+circle.compound:hover {
+    stroke: #888888;
+    fill: #555555;
+}
+
+circle.selected {
+    stroke: #999999;
+    fill: #666666;
+}
+
+circle.highlighted {
+    stroke: #888888;
+    fill: #555555;
+}
+
+circle.hidden {
+    visibility: none;
+    opacity: 0.0;
+}
+
+line.combination {
+    stroke-opacity: 0.2;
+    stroke-width: 1%;
+    stroke: black;
+}
+
+line.combination:hover {
+    stroke-opacity: 0.4;
+}
+
+line.selected {
+    stroke-opacity: 0.7;
+}
+
+line.highlighted {
+    stroke-opacity: 0.4;
+}
+
+line.hidden {
+    visibility: none;
+    stroke-opacity: 0.0;
+}
