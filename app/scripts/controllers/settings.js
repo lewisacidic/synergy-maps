@@ -11,18 +11,26 @@
 
 
 angular.module('frontendApp')
-  .controller('SettingsCtrl', function ($scope) {
-   
+  .controller('SettingsCtrl', function ($scope, $modalInstance, settings) {
 
-    $scope.defaultSynergyColor = '#0000FF';
-    $scope.defaultAntagonismColor = '#FF0000';
+    $scope.colors = settings.colors;
 
-    $scope.reset = function() {
-        console.log($scope.synergyColor);
-        $scope.synergyColor = $scope.defaultSynergyColor;
-        $scope.antagonismColor = $scope.defaultAntagonismColor;
+    $scope.$watch('colors', function(newColors) {
+        settings.colors = newColors;
+        console.log('Changed color');
+    });
+
+    $scope.colorBlindMode = function () {
+        settings.colors.antagonismColor = '#AAAAAA';
+        settings.colors.synergyColor = '#333333';
     };
 
-    $scope.reset();
+    $scope.reset = function () {
+        settings.colors.antagonismColor = '#FF0000';
+        settings.colors.synergyColor = '#0000FF';
+    };
 
+    $scope.dismiss = function () {
+        $modalInstance.dismiss('cancel');
+    }
   });

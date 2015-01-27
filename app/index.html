@@ -33,6 +33,7 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/synergy-map.css">
     <!-- endbuild -->
   </head>
   <body ng-app="frontendApp">
@@ -57,39 +58,56 @@
               <!-- Right Nav Section -->
               <ul class="right">
                 <li has-dropdown>
-                  <a href="#">{{currentRep}}</a>
+                  <a href="#">
+                    <div class="dropdown-type">Representation</div>
+                    <div class="dropdown-value">{{dataService.current.representationType}}</div>
+                  </a>
                   <ul top-bar-dropdown>
-                    <li ng-class="{{rep.class}}" ng-repeat="rep in representations">
-                        <a href="#">{{rep.name}}</a>
+                    <li class="{{representationType === dataService.current.representationType ? 'active' : ''}}" 
+                        ng-repeat="representationType in dataService.available.representationTypes">
+                        <a href="#" ng-click="dataService.setRepresentationType(representationType)">{{representationType}}</a>
                     </li>
                   </ul>
                 </li>
                 <li has-dropdown>
-                  <a href="#">{{currentRed}}</a>
+                  <a href="#">
+                    <div class="dropdown-type">Reduction Type</div>
+                    <div class="dropdown-value">{{dataService.current.dimensionalityReductionType}}</div>
+                  </a>
                   <ul top-bar-dropdown>
-                    <li ng-class="{{redTech.class}}" ng-repeat="redTech in reductionTechs">
-                        <a href="#">{{redTech.name}}</a>
+                    <li class="{{dimensionalityReductionType === dataService.current.dimensionalityReductionType ? 'active' : ''}}" 
+                        ng-repeat="dimensionalityReductionType in dataService.available.dimensionalityReductionTypes">
+                        <a href="#" ng-click="dataService.setDimensionalityReductionType(dimensionalityReductionType)">{{dimensionalityReductionType}}</a>
                     </li>
                   </ul>
                 </li>
                 <li has-dropdown>
-                  <a href="#">{{currentSyn}}</a>
+                  <a href="#">
+                    <div class="dropdown-type">Synergy Measure</div>
+                    <div class="dropdown-value">{{dataService.current.synergyType}}</div>
+                  </a>
                   <ul top-bar-dropdown>
-                    <li ng-class="{{syn.class}}" ng-repeat="syn in synergyTypes">
-                        <a href="#">{{syn.name}}</a>
+                    <li class="{{synergyType === dataService.current.synergyType ? 'active' : ''}}" 
+                        ng-repeat="synergyType in dataService.available.synergyTypes">
+                        <a href="#" ng-click="dataService.setSynergyType(synergyType)">{{synergyType}}</a>
                     </li>
                   </ul>
                 </li>
                 <li has-dropdown>
-                  <a href="#">{{currentAct}}</a>
+                  <a href="#">
+                    <div class="dropdown-type">Activity Measure</div>
+                    <div class="dropdown-value">{{dataService.current.activityType}}</div>
+                  </a>
                   <ul top-bar-dropdown>
-                    <li ng-class="{{activity.class}}" ng-repeat="activity in activityTypes"|>
-                        <a href="#">{{activity.name}}</a>
+                    <li class="{{activityType === dataService.current.activityType ? 'active' : ''}}" 
+                        ng-repeat="activityType in dataService.available.activityTypes"|>
+                        <a href="#" ng-click="dataService.setActivityType(activityType)">{{activityType}}</a>
                     </li>
                   </ul>
                 </li>
                 <li class="has-form">
-                  <input type="text" ng-model="currentSearch" placeholder="Search">
+                  <fa name="search" class="magnifying-glass"></fa>
+                  <input class="dream-search" type="text" typeahead="compound.Name for compound in dataService.data.compounds | filter:$viewValue | limitTo:8" ng-model="currentSearch" placeholder="Search" class="form-control">
                 </li>
                 <li>
                     <a href="#" ng-click="openSettings()"><fa name="cog"></fa> Settings</a>
@@ -99,9 +117,25 @@
           </top-bar>   
         </div>
 
-        <div id="content">
-
+        <div id="content" ng-controller="MainCtrl">
+            <div class="row">
+              <div class="small-12 columns">
+                <div class="panel">
+                  <table>
+                    <thead><td>Dataset</td></thead>
+                    <tbody>
+                      <tr>
+                        <td>Data 1</td>
+                      </tr>
+                      <tr>
+                        <td>Data 2</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
         </div>
+
 
     </div>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -163,6 +197,7 @@
     <script src="bower_components/angular-fontawesome/dist/angular-fontawesome.js"></script>
     <script src="bower_components/angular-foundation-colorpicker/js/foundation-colorpicker-module.js"></script>
     <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -172,7 +207,6 @@
         <script src="scripts/controllers/nav.js"></script>
         <script src="scripts/controllers/settings.js"></script>
         <script src="scripts/services/settings.js"></script>
-        <script src="scripts/services/data.js"></script>
         <script src="scripts/directives/synergymap.js"></script>
         <script src="scripts/services/dataservice.js"></script>
         <!-- endbuild -->

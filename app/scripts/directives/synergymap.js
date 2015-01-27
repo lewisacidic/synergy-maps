@@ -9,10 +9,11 @@
 angular.module('frontendApp')
   .directive('synergyMap', function () {
     return {
-      template: '<div></div>',
+      template: '<svg class="synergy-map" xmlns="http://www.w3.org/2000/svg" version="1.1">' +
+          '</svg>',
       restrict: 'E',
-      link: function postLink(scope, element, attrs) {
-        element.text('this is the synergyMap directive');
+      link: function postLink(attrs, element, scope) {
+        data = attrs['data'];
       }
     };
   });
