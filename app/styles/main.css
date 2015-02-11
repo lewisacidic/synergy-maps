@@ -1,13 +1,30 @@
-html, body {
-    height: 100%;
-    margin: 0px;
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
+
+html, body, div, span, button, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  font-family: 'Source Sans Pro', sans-serif;
+
 }
 
 .top-bar .name h1 {
-  font-size: 20px;
-  font-weight: bolder;
-  
+  font-size: 24px;
 }
+
+.top-bar-section ul li > a {
+  font-family: 'Source Sans Pro';
+}
+
 #wrapper:before {
     content:'';
     float: left;
@@ -15,20 +32,11 @@ html, body {
 }
 #wrapper {
     height: 100%;
-    background-color: black;
-    color: white;
+
 }
-#header {
-    background-color:#000;
-}
+
 #content {
-    background-color: #DDDDDD;
-    display: relative;
-}
-#content:after {
-    content:'';
-    display: block;
-    clear: both;
+
 }
 
 .has-form {
@@ -44,7 +52,8 @@ html, body {
 /* nav bar */
 .top-bar, .top-bar-section li:not(.has-form) a:not(.button), .top-bar-section .has-form, .top-bar-section .dropdown li:not(.has-form):not(.active) > a:not(.button) {
   background: #444;
-}
+  min-width: 10em;
+  }
 
 .dropdown-type {
   opacity: 0.75;
@@ -52,6 +61,16 @@ html, body {
   padding: .85em 0 0.5em 0;
   line-height: 0.8125em;
   font-size: 0.8125em;
+}
+
+.dropdown-info {
+  z-index: 5;
+  opacity: 0.6;
+  float: right;
+}
+
+.dropdown-info:hover {
+  opacity: 1.0;
 }
 
 .dropdown-value {
@@ -64,6 +83,33 @@ html, body {
 .has-form li:not(.has-form) a:not(.button), .has-form .dropdown {
   color: black;
   background: none;
+}
+
+.typeahead-id {
+  position:absolute;
+  left: 55px;
+  bottom: 0.75em;
+  line-height: 0.8123em;
+  font-weight: lighter;
+  font-size: 0.8123em;
+  opacity: 0.75;
+}
+
+.typeahead-label {
+  position: absolute;
+  line-height: 1.0em;
+  font-size: 1.0em;
+  left: 55px;
+  top: 0.75em;
+
+}
+
+.typeahead-item {
+  position: relative;
+}
+
+ul[typeahead-popup] {
+  width: 12em;
 }
 
 /* active typeahead*/
@@ -101,15 +147,6 @@ table.color-settings tbody tr {
 
 .dismiss:hover {
     opacity: 1.0;
-}
-
-
-svg.synergy-map {
- position: absolute; 
- height: 100%; 
- width: 100%; 
- left: 0; 
- top: 45px;  /*top-bar width*/
 }
 
 .magnifying-glass {
@@ -151,6 +188,39 @@ ul[typeahead-popup] {
 
 label {
     color: white;
+}
+
+.fade {
+  opacity: 0;
+  -webkit-transition: opacity .15s linear;
+          transition: opacity .15s linear;
+}
+.fade.in {
+  opacity: 1;
+}
+
+.reveal-modal.fade {
+  -webkit-transition: -webkit-transform .3s ease-out;
+     -moz-transition:    -moz-transform .3s ease-out;
+       -o-transition:      -o-transform .3s ease-out;
+          transition:         transform .3s ease-out;
+  -webkit-transform: translate(0, -25%);
+      -ms-transform: translate(0, -25%);
+          transform: translate(0, -25%);
+}
+.reveal-modal.in {
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+
+.reveal-modal-bg.fade {
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+.reveal-modal-bg.in {
+  filter: alpha(opacity=50);
+  opacity: .5;
 }
 
 

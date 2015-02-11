@@ -1,0 +1,8 @@
+<div class="tooltip-close dismiss" ng-click="close()"><i class="fa fa-close"></i></div>
+<h2 class="tooltip-title">{{title}}</h2>
+<accordion close-others="oneAtATime">
+    <accordion-group ng-repeat="data in content" is-open="isopen" ng-init="isopen = $first">
+        <accordion-heading>{{data.title}} <i class="tooltip-accordion-toggle" ng-class="{'fa fa-chevron-down': isopen, 'fa fa-chevron-right': !isopen}"></i></accordion-heading>
+        {{data.content}}
+    </accordion-group>
+</accordion>

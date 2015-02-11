@@ -49,93 +49,102 @@
           <top-bar is-hover>
             <ul class="left">
               <li class="name">
-                <h1><a href="#">Synergy Maps</a></h1>
+                <h1><a href="#/">Synergy Maps</a></h1>
               </li>
-              <li toggle-top-bar class="menu-icon"><a href="#">Menu</a></li>
+              <li toggle-top-bar class="menu-icon"><a>Menu</a></li>
             </ul>
 
             <top-bar-section>
               <!-- Right Nav Section -->
               <ul class="right">
                 <li has-dropdown>
-                  <a href="#">
-                    <div class="dropdown-type">Representation</div>
+                  <a>
+                    <div class="dropdown-type">Representation Type</div>
                     <div class="dropdown-value">{{dataService.current.representationType}}</div>
                   </a>
                   <ul top-bar-dropdown>
                     <li class="{{representationType === dataService.current.representationType ? 'active' : ''}}" 
                         ng-repeat="representationType in dataService.available.representationTypes">
-                        <a href="#" ng-click="dataService.setRepresentationType(representationType)">{{representationType}}</a>
+                        <a ng-click="dataService.setRepresentationType(representationType)">
+                          <span class="dropdown-name">{{representationType | truncate : 12 : '...'}}</span>
+                          <span class="dropdown-info" ng-click="getInfo($event, representationType)"><fa name="info-circle"></fa></span>
+                        </a>
                     </li>
                   </ul>
                 </li>
                 <li has-dropdown>
-                  <a href="#">
+                  <a>
                     <div class="dropdown-type">Reduction Type</div>
                     <div class="dropdown-value">{{dataService.current.dimensionalityReductionType}}</div>
                   </a>
                   <ul top-bar-dropdown>
                     <li class="{{dimensionalityReductionType === dataService.current.dimensionalityReductionType ? 'active' : ''}}" 
                         ng-repeat="dimensionalityReductionType in dataService.available.dimensionalityReductionTypes">
-                        <a href="#" ng-click="dataService.setDimensionalityReductionType(dimensionalityReductionType)">{{dimensionalityReductionType}}</a>
+                        <a ng-click="dataService.setDimensionalityReductionType(dimensionalityReductionType)">
+                          <span class="dropdown-name">{{dimensionalityReductionType | truncate : 12 : '...'}}</span>
+                          <span class="dropdown-info" ng-click="getInfo($event, dimensionalityReductionType)"><fa name="info-circle"></fa></span>
+                        </a>
                     </li>
                   </ul>
                 </li>
                 <li has-dropdown>
-                  <a href="#">
-                    <div class="dropdown-type">Synergy Measure</div>
+                  <a>
+                    <div class="dropdown-type">Synergy Metric</div>
                     <div class="dropdown-value">{{dataService.current.synergyType}}</div>
                   </a>
                   <ul top-bar-dropdown>
                     <li class="{{synergyType === dataService.current.synergyType ? 'active' : ''}}" 
                         ng-repeat="synergyType in dataService.available.synergyTypes">
-                        <a href="#" ng-click="dataService.setSynergyType(synergyType)">{{synergyType}}</a>
+                        <a ng-click="dataService.setSynergyType(synergyType)">
+                          <span class="dropdown-name">{{synergyType | truncate : 12 : '...'}}</span>
+                          <span class="dropdown-info" ng-click="getInfo($event, synergyType)"><fa name="info-circle"></fa></span>
+                        </a>
                     </li>
                   </ul>
                 </li>
                 <li has-dropdown>
-                  <a href="#">
-                    <div class="dropdown-type">Activity Measure</div>
-                    <div class="dropdown-value">{{dataService.current.activityType}}</div>
+                  <a >
+                    <div class="dropdown-type">Activity Metric</div>
+                    <div class="dropdown-value">{{dataService.current.activityType | truncate : 12 : '...'}}</div>
                   </a>
                   <ul top-bar-dropdown>
                     <li class="{{activityType === dataService.current.activityType ? 'active' : ''}}" 
                         ng-repeat="activityType in dataService.available.activityTypes"|>
-                        <a href="#" ng-click="dataService.setActivityType(activityType)">{{activityType}}</a>
+                        <a ng-click="dataService.setActivityType(activityType)">
+                          <span class="dropdown-name">{{activityType}}</span>
+                          <span class="dropdown-info" ng-click="getInfo($event, synergyType)"><fa name="info-circle"></fa></span>
+                        </a>
                     </li>
                   </ul>
                 </li>
                 <li class="has-form">
                   <fa name="search" class="magnifying-glass"></fa>
-                  <input class="dream-search" type="text" typeahead="compound.Name for compound in dataService.data.compounds | filter:$viewValue | limitTo:8" ng-model="currentSearch" placeholder="Search" class="form-control">
+                  <script type="text/ng-template" id="customTemplate.html">
+                    <a class="typeahead-item">
+                        <img ng-src="data/NCATS-Malaria/mol_svg/{{match.model.id}}.svg" width="32">
+                        <div class="typeahead-label" bind-html-unsafe="match.label | truncate:15:'...' | typeaheadHighlight:query"></div>
+                        <div class="typeahead-id" bind-html-unsafe="match.model.id"></div>
+                    </a>
+                  </script>
+                  <input class="dream-search" type="text" 
+                          ng-model="currentSearch"
+                          typeahead='compound as compound.Name for compound in dataService.data.compounds | filter:$viewValue | limitTo:8'  
+                          placeholder="Search" class="form-control" 
+                          typeahead-on-select="log($item)"
+                          typeahead-loading="loading"
+                          typeahead-template-url="customTemplate.html">
+                  <i class="fa fa-loading" ng-show="loading"></i>
                 </li>
                 <li>
-                    <a href="#" ng-click="openSettings()"><fa name="cog"></fa> Settings</a>
+                    <a ng-click="openSettings()"><fa name="cog"></fa> Settings</a>
                 </li>
               </ul>
             </top-bar-section>
           </top-bar>   
         </div>
 
-        <div id="content" ng-controller="MainCtrl">
-            <div class="row">
-              <div class="small-12 columns">
-                <div class="panel">
-                  <table>
-                    <thead><td>Dataset</td></thead>
-                    <tbody>
-                      <tr>
-                        <td>Data 1</td>
-                      </tr>
-                      <tr>
-                        <td>Data 2</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-            </div>
+        <div id="content" ng-view="">
         </div>
-
 
     </div>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -198,6 +207,7 @@
     <script src="bower_components/angular-foundation-colorpicker/js/foundation-colorpicker-module.js"></script>
     <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
     <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -209,6 +219,8 @@
         <script src="scripts/services/settings.js"></script>
         <script src="scripts/directives/synergymap.js"></script>
         <script src="scripts/services/dataservice.js"></script>
+        <script src="scripts/controllers/map.js"></script>
+        <script src="scripts/directives/tooltip.js"></script>
         <!-- endbuild -->
-</body>
+  </body>
 </html>
