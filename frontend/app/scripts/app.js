@@ -10,6 +10,7 @@
  */
 angular
   .module('frontendApp', [
+    'angular.filter',
     'colorpicker.module',
     'picardy.fontawesome',
     'mm.foundation',
@@ -27,6 +28,10 @@ angular
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
+      })
+      .when('/examples/:dataset', {
+        templateUrl: 'views/map.html',
+        controller: 'MapCtrl'
       })
       .otherwise({
         redirectTo: '/'

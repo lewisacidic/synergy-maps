@@ -3,7 +3,7 @@
         xmlns:svg="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
         xml:space="preserve" width="300px" height="300px" >
-<svg:polygon fill="rgb(255,255,255)" stroke="none" stroke-width="0" points="0.00,0.00 300.00,0.00 300.00,300.00 0.00,300.00 0.00,0.00"></svg:polygon>
+<svg:polygon stroke="none" stroke-width="0" points="0.00,0.00 300.00,0.00 300.00,300.00 0.00,300.00 0.00,0.00"></svg:polygon>
 <svg:g>  <svg:text font-family="helvetica"   font-size="8.38" fill="rgb(255,0,0)" x="197.93" y="142.80">O</svg:text>
 </svg:g><svg:g>  <svg:text font-family="helvetica"   font-size="8.38" fill="rgb(0,0,255)" x="208.76" y="152.99">N</svg:text>
 </svg:g><svg:g>  <svg:text font-family="helvetica"   font-size="8.38" fill="rgb(204,204,0)" x="219.58" y="163.19">S</svg:text>

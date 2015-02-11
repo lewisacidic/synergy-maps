@@ -11,7 +11,17 @@ angular.module('frontendApp')
   .controller('NavCtrl', function ($scope, $modal, dataService) {
 
     $scope.dataService = dataService;
-    $scope.currentSearch = null;
+
+    $scope.currentSearch = '';
+
+    $scope.getInfo = function(e, infoObject) {
+      e.stopPropagation();
+      window.alert('Info about ' + infoObject + ' is not available at the moment.');
+    };
+
+    $scope.log = function(a) {
+      console.log(a);
+    };
 
   	//open the settings modal
 	  $scope.openSettings = function () {

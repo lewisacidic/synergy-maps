@@ -24,7 +24,7 @@ angular.module('frontendApp')
 
       $http.get('data/metadata.json')
         .then(function (response) {
-
+          dataService.exampleList.length = 0;
           response.data.datasets.forEach(function(d) {
             dataService.exampleList.push(d);
           });
@@ -127,12 +127,15 @@ angular.module('frontendApp')
       var compObj = {};
 
       this.data.compounds.forEach(function(d) {
+        d.combinations = [];
         compObj[d.id] = d;
       });
 
       this.data.combinations.forEach(function(d) {
+
         d.source = compObj[d.ColId];
         d.target = compObj[d.RowId];
+        
       });
 
       return this;
@@ -144,6 +147,10 @@ angular.module('frontendApp')
       this.available.dimensionalityReductionTypes.length = 0;
       this.available.synergyTypes.length = 0;
       this.available.activityTypes.length = 0;
+      this.current.representationType = null;
+      this.current.dimensionalityReductionType = null;
+      this.current.synergyType = null;
+      this.current.activityType = null;
       return this;
     };
 
@@ -192,8 +199,8 @@ angular.module('frontendApp')
       $http.get('data/' + name + '/data.json')
         .then(function(response) {
           //retrieve the data as a property
+          dataService.datasetName = name;
           dataService.data = response.data;
-
           //process the data
           dataService.initializeData();
 

@@ -1,51 +1,94 @@
 
 
 circle.compound {
-    stroke-width: 1px;
     stroke: #DDDDDD;
     fill: #888888;
     opacity: 1.0;
 }
 
-circle.compound:hover {
-    stroke: #888888;
-    fill: #555555;
-}
-
-circle.selected {
+circle.highlighted {
     stroke: #999999;
     fill: #666666;
 }
 
-circle.highlighted {
+circle.selected {
     stroke: #888888;
     fill: #555555;
 }
 
 circle.hidden {
+    display: none;
     visibility: none;
     opacity: 0.0;
 }
 
 line.combination {
     stroke-opacity: 0.2;
-    stroke-width: 1%;
     stroke: black;
-}
-
-line.combination:hover {
-    stroke-opacity: 0.4;
-}
-
-line.selected {
-    stroke-opacity: 0.7;
 }
 
 line.highlighted {
     stroke-opacity: 0.4;
 }
 
+line.selected {
+    stroke-opacity: 0.6;
+}
+
 line.hidden {
+    display: none;
     visibility: none;
     stroke-opacity: 0.0;
+}
+
+.tooltip-detail {
+    display: none;
+    overflow: auto;
+    position: absolute;
+    opacity: 0.9;
+    background: white;
+    user-select:none;
+    top: 80px;
+    right: 20px;
+    width: 360px;
+    z-index: 10;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.188235) 0px 10px 30px 0px;
+    -webkit-font-smoothing: antialiased;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.188235) 0px 10px 30px 0px;
+    box-sizing: border-box;
+
+}
+
+.tooltip-accordion-toggle {
+    opacity: 0.4;
+    float:right;
+    vertical-align: middle;
+    line-height: 1.5em;
+}
+
+.tooltip-title {
+    padding: 0.25em 0.5em 0.0em 0.5em;
+    font-size: 20pt;
+    font-weight: 600;
+}
+
+accordion-group {
+    background: black;
+}
+
+.accordion dd > a {
+    padding: 0.5em 1em 0.5em 1em;
+    font-weight: lighter;
+}
+
+.tooltip-close {
+    font-size: 14pt;
+    position: absolute;
+    top: 0.4em;
+    right: 0.8em;
+    color: #999999;
 }
