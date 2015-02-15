@@ -1,4 +1,6 @@
 import tsne as _tsne
+import sys
+import os
 
 class TSNE(object):
 
@@ -15,6 +17,9 @@ class TSNE(object):
 
     def fit_transform(self, X):
         X = X.astype(float)
-        print _tsne
-        return _tsne.bh_sne(X, perplexity=self.perplexity, theta=self.theta)
-
+        sys.stdout = os.devnull
+        sys.stderr = os.devnull
+        res = _tsne.bh_sne(X, perplexity=self.perplexity, theta=self.theta)
+        sys.stdout = sys.__stdout__
+        sys.stderr = sys.__stderr__
+        return res
