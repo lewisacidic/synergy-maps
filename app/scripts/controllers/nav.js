@@ -8,19 +8,27 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('NavCtrl', function ($scope, $modal, dataService) {
+  .controller('NavCtrl', function ($scope, $modal, dataService, SweetAlert) {
 
     $scope.dataService = dataService;
 
     $scope.currentSearch = '';
 
+
     $scope.getInfo = function(e, infoObject) {
       e.stopPropagation();
-      window.alert('Info about ' + infoObject + ' is not available at the moment.');
+      console.log(dataService.metadata);
+      SweetAlert.swal({
+        title: infoObject, 
+        html: dataService.metadata[infoObject],
+        allowOutsideClick: true,
+
+      });
     };
 
-    $scope.log = function(a) {
-      console.log(a);
+    $scope.select = function(a) {
+      dataService.model.selected = a;
+      console.log(dataService.model.selected);
     };
 
   	//open the settings modal
