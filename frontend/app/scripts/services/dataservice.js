@@ -17,7 +17,7 @@ angular.module('frontendApp')
     
     //list of examples
     dataService.exampleList = [];
-
+    dataService.model = {selected:null, highlighted: []}
     dataService.getExampleList = function(callback) {
       
       var delay = $q.defer();
@@ -70,7 +70,7 @@ angular.module('frontendApp')
       dataService.available.dimensionalityReductionTypes.length = 0;
 
       // refill the dimeredtype array with new data
-      Object.keys(dataService.data.representations[this.current.representationType])
+      Object.keys(dataService.data.coordinates[this.current.representationType])
         .forEach(function(d) { dataService.available.dimensionalityReductionTypes.push(d); });
 
       // if the previous dimensionality reduction technique has been applied to the new representation, keep.  Otherwise set to new.
@@ -94,12 +94,12 @@ angular.module('frontendApp')
       this.current.dimensionalityReductionType = newDimRedType;
 
       //cache the rep to load the coordinates from
-      var rep = this.data.representations[this.current.representationType][this.current.dimensionalityReductionType];
+      var rep = this.data.coordinates[this.current.representationType][this.current.dimensionalityReductionType];
 
       //change data
       this.data.compounds.forEach(function(d) {
-        d.X = rep[d.id].X;
-        d.Y = rep[d.id].Y;
+        d.x = rep[d.id].x;
+        d.y = rep[d.id].y;
       });
     };
 
@@ -108,6 +108,12 @@ angular.module('frontendApp')
 
       // should check if is a member of available
       dataService.current.synergyType = newSynergyType;
+
+      // change synergy to new type on all combinations
+      dataService.data.combinations.forEach(function(d) {
+        d.value = d[newSynergyType];
+        d.synergistic = d.value > 0;
+      })
 
     };
 
@@ -118,6 +124,10 @@ angular.module('frontendApp')
 
       // should check if is a member of available
       dataService.current.activityType = newActivityType;
+
+      dataService.data.compounds.forEach(function(d) {
+        d.activity = d[newActivityType];
+      })
       
     };
 
@@ -159,31 +169,42 @@ angular.module('frontendApp')
       // remove old representation types if any previously existed
       this.empty();
 
+      // add metadata for each option
+      this.metadata = {};
+
       // add representation types
-      Object.keys(this.data.representations)
-        .forEach(function(d) { dataService.available.representationTypes.push(d); });
+      this.data.metadata.representationTypes.forEach(function(d) { 
+        dataService.metadata[d.name] = d.metadata;
+        dataService.available.representationTypes.push(d.name); });
       
       //
       // set current representation type to be first in the list 
       // (also sets the dimRedType and current dimredtype as these are dependent)
       //
 
+      this.data.metadata.dimensionalityReductionTypes.forEach(function(d) {
+        dataService.metadata[d.name] = d.metadata
+      });
+
       this.setRepresentationType(this.available.representationTypes[0]);
 
       // add activity types
       this.data.metadata.activityTypes.forEach(function(d) {
-        dataService.available.activityTypes.push(d);
+        dataService.available.activityTypes.push(d.name);
+        dataService.metadata[d.name] = d.metadata;
       });
       // set current activity type to be first in the list
       this.setActivityType(this.available.activityTypes[0]);
 
       // add synergy types 
       this.data.metadata.synergyTypes.forEach(function(d) {
-        dataService.available.synergyTypes.push(d);
+        dataService.metadata[d.name] = d.metadata;
+        dataService.available.synergyTypes.push(d.name);
       });
 
       // set current synergy type to be first in the list
       this.setSynergyType(this.available.synergyTypes[0]);
+
 
       // set first in list to be active
       this.linkUp();

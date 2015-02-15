@@ -10,6 +10,7 @@
  */
 angular
   .module('frontendApp', [
+    'oitozero.ngSweetAlert',
     'angular.filter',
     'colorpicker.module',
     'picardy.fontawesome',

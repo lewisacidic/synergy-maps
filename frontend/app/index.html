@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="bower_components/foundation/css/foundation.css" />
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/angular-foundation-colorpicker/css/colorpicker.css" />
+    <link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -112,7 +113,7 @@
                         ng-repeat="activityType in dataService.available.activityTypes"|>
                         <a ng-click="dataService.setActivityType(activityType)">
                           <span class="dropdown-name">{{activityType}}</span>
-                          <span class="dropdown-info" ng-click="getInfo($event, synergyType)"><fa name="info-circle"></fa></span>
+                          <span class="dropdown-info" ng-click="getInfo($event, activityType)"><fa name="info-circle"></fa></span>
                         </a>
                     </li>
                   </ul>
@@ -121,7 +122,7 @@
                   <fa name="search" class="magnifying-glass"></fa>
                   <script type="text/ng-template" id="customTemplate.html">
                     <a class="typeahead-item">
-                        <img ng-src="data/NCATS-Malaria/mol_svg/{{match.model.id}}.svg" width="32">
+                        <img ng-src="data/images/{{match.model.id}}-{{match.model.label}}.svg" width="32">
                         <div class="typeahead-label" bind-html-unsafe="match.label | truncate:15:'...' | typeaheadHighlight:query"></div>
                         <div class="typeahead-id" bind-html-unsafe="match.model.id"></div>
                     </a>
@@ -130,7 +131,7 @@
                           ng-model="currentSearch"
                           typeahead='compound as compound.Name for compound in dataService.data.compounds | filter:$viewValue | limitTo:8'  
                           placeholder="Search" class="form-control" 
-                          typeahead-on-select="log($item)"
+                          typeahead-on-select="select($item)"
                           typeahead-loading="loading"
                           typeahead-template-url="customTemplate.html">
                   <i class="fa fa-loading" ng-show="loading"></i>
@@ -208,6 +209,8 @@
     <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
     <script src="bower_components/d3/d3.js"></script>
     <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
+    <script src="bower_components/angular-sweetalert/SweetAlert.js"></script>
+    <script src="bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

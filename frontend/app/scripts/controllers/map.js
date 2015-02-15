@@ -8,10 +8,12 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('MapCtrl', function ($scope, $routeParams, dataService, $window) {
+  .controller('MapCtrl', function ($scope, $routeParams, dataService, settings, $window) {
 
     //locate database from the route
     $scope.datasetName = $routeParams.dataset;
+
+    $scope.settings = settings;
 
     //set the positional style of the svg, allowing for responsiveness
     $scope.svgStyle = {position: 'absolute',
@@ -29,7 +31,7 @@ angular.module('frontendApp')
 
 
     //selected information is currently nothing
-    $scope.model = {selected: null, highlighted: []};
+    $scope.model = dataService.model;
 
 
     $scope.tooltip = {title: 'Dynamic title', 
@@ -60,7 +62,7 @@ angular.module('frontendApp')
           $scope.tooltip.visibility = true;
 
           // if is compound
-          if (dataService.data.compounds.indexOf(selected) > 0) {
+          if (dataService.data.compounds.indexOf(selected) >= 0) {
             $scope.tooltip.title = selected.Name;
             $scope.tooltip.content = [
                 {title: 'structure', content: '<div>pretty picture</div>'},
