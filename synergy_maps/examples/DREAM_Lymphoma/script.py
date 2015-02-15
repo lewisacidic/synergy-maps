@@ -5,6 +5,7 @@ from synergy_maps import *
 from sklearn.decomposition import PCA
 from sklearn.manifold import MDS
 import sys
+import numpy as np
 
 
 def make_map():
@@ -29,9 +30,9 @@ def make_map():
     representation_types = [ random, morg2 ]
 
     sys.stdout.write('...OK\n')
-    # reduction methods    
+    # reduction types    
 
-    sys.stdout.write('Making reduction methods: ')
+    sys.stdout.write('Making reduction types: ')
 
     sys.stdout.write(' [ ')
 
@@ -45,9 +46,9 @@ def make_map():
     mds = ReductionMethod(name='MDS',
         model=MDS(),
         metadata=
-            """MultiDimensional Scaling implemented in scikit-learn""")
+            """<a href="http://en.wikipedia.org/wiki/Multidimensional_scaling" target="_blank">Multidimensional Scaling</a> implemented in <a href="http://scikit-learn.org/stable/" target="_blank">scikit-learn</a>""")
 
-    sys.stdout.write(', TSNE')
+    sys.stdout.write(', t-SNE')
 
     tsne = ReductionMethod(name='t-SNE',
         model=TSNE(perplexity=1),
@@ -58,7 +59,7 @@ def make_map():
 
     sys.stdout.write(' ] ')
 
-    reduction_methods = [ pca, mds, tsne ]
+    reduction_types = [ pca, mds, tsne ]
 
     sys.stdout.write('...OK\n')
 
@@ -83,8 +84,8 @@ def make_map():
 
     sys.stdout.write(' [ ')
 
-    sys.stdout.write('Excess Over Bliss')
-    excessOverBliss = SynergyType(name='Excess over Bliss', metadata=
+    sys.stdout.write('ExcessOverBliss')
+    excessOverBliss = SynergyType(name='ExcessOverBliss', metadata=
         """Difference in observed vs expected activity of the component compounds,"""
         """each at the IC20 concentration (when known) assuming the Bliss Independence model""")
 
@@ -98,6 +99,7 @@ def make_map():
     sys.stdout.write('Reading in compounds:')
     compound_df = skchem.read_smiles('/Users/RichLewis/Git/Synergy-Maps/backend/synergy_maps/examples/DREAM_Lymphoma/compounds.smiles')
     compound_df.set_index('id', inplace=True)
+    compound_df['pIC20'] = -np.log10(compound_df['IC20'])
     sys.stdout.write('...OK\n')
 
     sys.stdout.write('Reading in combinations:')
@@ -108,7 +110,7 @@ def make_map():
     sm = SynergyMap(compound_df=compound_df,
         combination_df=combination_df,
         representation_types=representation_types,
-        reduction_methods=reduction_methods,
+        reduction_types=reduction_types,
         activity_types=activity_types,
         synergy_types=synergy_types)
 
@@ -116,7 +118,8 @@ def make_map():
 
 if __name__ == "__main__":
     sm = make_map()
-    #sys.stdout.write(sm.to_json())
+    with open(sys.argv[1], 'w') as f:
+        f.writelines(sm.to_json())
 
 
 

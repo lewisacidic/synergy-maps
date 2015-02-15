@@ -20,7 +20,7 @@ class SynergyMap(object):
         activity_types=[], 
         synergy_types=[], 
         representation_types=[], 
-        reduction_methods=[],
+        reduction_types=[],
         metadata=None):
        
         """
@@ -44,7 +44,7 @@ class SynergyMap(object):
             representations:
              -  a list of representations to use
 
-            reductions_methods:
+            reductions_types:
              -  a list of reduction methods to use 
 
             metadata:
@@ -56,26 +56,26 @@ class SynergyMap(object):
         self.combinations = combination_df
 
         self.representation_types = representation_types
-        self.reduction_methods = reduction_methods
+        self.reduction_types = reduction_types
         self.activity_types = activity_types
         self.synergy_types = synergy_types
 
         self.metadata = metadata
 
-        sm._generate_coordinates()
-        sm._generate_graph()
-        sm._generate_metadata()
-        sm._generate_comp_svgs()
-        
+        self._generate_coordinates()
+        self._generate_graph()
+        self._generate_metadata()
+        self._generate_comp_svgs()
+
     def _generate_metadata(self):
 
         """draw the metadata out of all objects, to make single metadata file"""
 
         self.dataset_metadata = {
-            'representations': {rep.name: rep.metadata for rep in self.representation_types},
-            'reduction_methods': {red.name: red.metadata for red in self.reduction_methods},
-            'activity_types': {act.name: act.metadata for act in self.activity_types},
-            'synergy_types': {syn.name: syn.metadata for syn in self.synergy_types},
+            'representationTypes': [rep.to_dict() for rep in self.representation_types],
+            'dimensionalityReductionTypes': [red.to_dict() for red in self.reduction_types],
+            'activityTypes': [act.to_dict() for act in self.activity_types],
+            'synergyTypes': [syn.to_dict() for syn in self.synergy_types],
             'dataset': self.metadata
         }
 
@@ -89,7 +89,7 @@ class SynergyMap(object):
         self.coordinates = defaultdict(dict)
 
         for rep in self.representation_types:
-            for red in self.reduction_methods:
+            for red in self.reduction_types:
                 self.coordinates[rep.name][red.name] = red(rep(self.compounds))
 
     def _generate_graph(self):

@@ -35,6 +35,12 @@ class RepresentationType(object):
         else:
             return compound_df.structure.apply(self.representation_func)
 
+    def to_dict(self):
+
+        return {"name": self.name, "metadata": self.metadata}
+
+
+
 class ReductionMethod(object):
     
     """
@@ -64,6 +70,12 @@ class ReductionMethod(object):
         return pd.DataFrame(self.fit_transform(representation_df.values), 
             index=representation_df.index, columns=['x','y'])
 
+    def to_dict(self):
+
+        return {"name": self.name, "metadata": self.metadata} 
+
+
+
 class ActivityType(object):
 
     """
@@ -85,6 +97,9 @@ class ActivityType(object):
         self.ascending = ascending
         self.metadata = metadata
 
+    def to_dict(self):
+
+        return {"name": self.name, "metadata": self.metadata} 
 
 class SynergyType(object):
 
@@ -107,3 +122,6 @@ class SynergyType(object):
         self.name = name
         self.metadata = metadata
 
+    def to_dict(self):
+
+        return {"name": self.name, "metadata": self.metadata} 
