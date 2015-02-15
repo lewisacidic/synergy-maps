@@ -10,10 +10,12 @@ setup(name='synergy_maps',
     packages=['synergy_maps'],
     install_requires=[
         #'rdkit',  ## currently rdkit does not have a valid pip installable package, so this dependency must be met by the installer
-        'skchem',
+        #'scikit-chem', ## currently scikit-chem is not pip installable
         'scikit-learn',
         'pandas',
-        'tsne'
+        'tsne',
+        'json',
+        'networkx'
         ],
     test_suite='nose.collector',
     tests_require=['nose'],
