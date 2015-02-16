@@ -122,14 +122,14 @@
                   <fa name="search" class="magnifying-glass"></fa>
                   <script type="text/ng-template" id="customTemplate.html">
                     <a class="typeahead-item">
-                        <img ng-src="data/images/{{match.model.id}}-{{match.model.label}}.svg" width="32">
+                        <img ng-src="data/images/{{match.model.id}}-{{match.label}}.svg" width="32">
                         <div class="typeahead-label" bind-html-unsafe="match.label | truncate:15:'...' | typeaheadHighlight:query"></div>
                         <div class="typeahead-id" bind-html-unsafe="match.model.id"></div>
                     </a>
                   </script>
                   <input class="dream-search" type="text" 
                           ng-model="currentSearch"
-                          typeahead='compound as compound.Name for compound in dataService.data.compounds | filter:$viewValue | limitTo:8'  
+                          typeahead='compound as compound.name for compound in dataService.data.compounds | filter:$viewValue | limitTo:8'  
                           placeholder="Search" class="form-control" 
                           typeahead-on-select="select($item)"
                           typeahead-loading="loading"

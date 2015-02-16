@@ -30,7 +30,7 @@ angular.module('frontendApp')
 
                               g.attr('transform', 'translate(' + d3.event.translate + ')scale(' + d3.event.scale + ')');
                               svg.selectAll('circle')
-                                .attr('r', function (d) { return  activityScale(d.activity) / d3.event.scale; })
+                                .attr('r', function (d) { return  activityScale(d.value) / d3.event.scale; })
                                 .attr('stroke-width', function () { return 1 / d3.event.scale; });
                               svg.selectAll('line')
                                 .attr('stroke-width', function (d) { return synergyScale(Math.abs(d.value)) / d3.event.scale; });
@@ -66,7 +66,7 @@ angular.module('frontendApp')
                     .range([10, 90]);
 
         activityScale = d3.scale.linear()
-                    .domain(d3.extent(newData.compounds, function(d) { return d.activity; }))
+                    .domain(d3.extent(newData.compounds, function(d) { return d.value; }))
                     .range([scope.activityThickness * 0.1, scope.activityThickness]);
 
         synergyScale = d3.scale.linear()
@@ -132,7 +132,7 @@ angular.module('frontendApp')
               .attr({
                 cx: function (d) { return xScale(d.x) + '%'; },
                 cy: function (d) { return yScale(d.y) + '%'; },
-                r: function (d) {return activityScale(d.activity); },
+                r: function (d) {return activityScale(d.value); },
                 class: 'compound'
               })
               .classed('selected', function (d) { return d === scope.selected; });
@@ -141,7 +141,7 @@ angular.module('frontendApp')
               .duration(750)
                     .attr('cx', function (d) { return xScale(d.x) + '%'; })
                     .attr('cy', function (d) { return yScale(d.y) + '%'; })
-                    .attr('r', function (d) { return activityScale(d.activity); });
+                    .attr('r', function (d) { return activityScale(d.value); });
 
         compounds.exit()
               .remove();

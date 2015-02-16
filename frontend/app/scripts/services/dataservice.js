@@ -111,7 +111,7 @@ angular.module('frontendApp')
 
       // change synergy to new type on all combinations
       dataService.data.combinations.forEach(function(d) {
-        d.value = d[newSynergyType];
+        d.value = d.synergies[newSynergyType];
         d.synergistic = d.value > 0;
       })
 
@@ -126,7 +126,7 @@ angular.module('frontendApp')
       dataService.current.activityType = newActivityType;
 
       dataService.data.compounds.forEach(function(d) {
-        d.activity = d[newActivityType];
+        d.value = d.activities[newActivityType];
       })
       
     };
