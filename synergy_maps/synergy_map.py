@@ -112,7 +112,7 @@ class SynergyMap(object):
 
         structure_path = os.path.join(os.path.split(os.path.split(os.path.dirname(__file__))[0])[0], 'frontend/app/data/images')
 
-        self.compounds.apply(lambda r: MolToFile(r.structure, os.path.join(structure_path, '{}-{}.svg'.format(r.name, r['Name']))), axis=1)
+        self.compounds.apply(lambda r: MolToFile(r.structure, os.path.join(structure_path, '{}-{}.svg'.format(r.name, r['name']))), axis=1)
 
 
     def to_json(self):
@@ -126,12 +126,35 @@ class SynergyMap(object):
         coords = json.loads(pd.json.dumps(self.coordinates, orient='index'))
         
         combs = self.combinations.reset_index().to_dict(orient='records')
+        
+        syn_types = [s.name for s in self.synergy_types]
+        new_combs = []
+
+        for comb in combs:
+            new_comb = {}
+            new_comb['id'] = comb['id']
+            new_comb['RowId'] = comb['RowId']
+            new_comb['ColId'] = comb['ColId']
+            new_comb['synergies'] = {k: v for k, v in comb.iteritems() if k in syn_types}
+            new_comb['properties'] = {k: v for k, v in comb.iteritems() if k not in syn_types + ['id', 'RowId', 'ColId']}
+            new_combs.append(new_comb)
 
         comps = self.compounds.drop('structure', axis=1).reset_index().to_dict(orient='records')
 
+        act_types = [a.name for a in self.activity_types]
+        new_comps = []
+        
+        for comp in comps:
+            new_comp = {}
+            new_comp['id'] = comp['id']
+            new_comp['name'] = comp['name']
+            new_comp['activities'] = {k: v for k, v in comp.iteritems() if k in act_types}
+            new_comp['properties'] = {k: v for k, v in comp.iteritems() if k not in act_types + ['id', 'name']}
+            new_comps.append(new_comp)
+
         ds = {
-                'compounds': comps,
-                'combinations': combs,
+                'compounds': new_comps,
+                'combinations': new_combs,
                 'coordinates': coords,
                 'metadata': self.dataset_metadata}
 
