@@ -34,11 +34,7 @@ angular.module('frontendApp')
     $scope.model = dataService.model;
 
 
-    $scope.tooltip = {title: 'Dynamic title', 
-                      content: [
-                        {title: 'you shouldn\'t be able to', content:'see this'}, 
-                        ],
-                      visibility: false};
+    $scope.tooltip = {visibility: false};
 
     //setInterval(function() { console.log($scope.model.selected)}, 1000);
 
@@ -47,6 +43,10 @@ angular.module('frontendApp')
         $scope.model.selected = null;
       }
     });
+
+    $scope.select = function(d) {
+      $scope.model.selected = d;
+    }
 
     $scope.$watch('model.selected', function(selected) {
         console.log('selected:', selected);
@@ -62,22 +62,25 @@ angular.module('frontendApp')
           $scope.tooltip.visibility = true;
 
           // if is compound
-          if (dataService.data.compounds.indexOf(selected) >= 0) {
-            $scope.tooltip.title = selected.Name;
-            $scope.tooltip.content = [
-                {title: 'structure', content: '<div>pretty picture</div>'},
-                {title: 'activity', content: 'IC50: ' + selected.IC50}
-              ];
+          if (dataService.data.compounds.indexOf(selected) > -1) {
+            var compound = selected;
+            console.log(dataService.data.combinations.filter(function(c) { return c.source === selected || c.target === selected }));
+
+            $scope.tooltip.data = {
+              compound: true,
+              object: compound,
+              neighbors: dataService.data.combinations.filter(function(c) { return c.source === selected || c.target === selected })
+            }
           }
           // otherwise if is combination
-          else if (dataService.data.combinations.indexOf(selected) > 0) {
-            $scope.tooltip.title = 'Combination';
-            $scope.tooltip.content = [
-                {title: 'components', content: selected.source.Name + ' and ' + selected.target.Name}
-                ];
-          }
+          else if (dataService.data.combinations.indexOf(selected) > -1) {
+            var combination = selected
+            $scope.tooltip.data = {
+              compound: false,
+              object: combination
+            }
 
-        } 
+        }}
 
     });
 

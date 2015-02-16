@@ -7,16 +7,17 @@
  * # tooltip
  */
 angular.module('frontendApp')
-  .directive('tooltip', function () {
+  .directive('tooltip', function (dataService) {
 
     return {
-        scope: {visibility: '=', content: '=', title: '=', height: '@'},
+        scope: {visibility: '=', data: '=', height: '@', click: "="},
         templateUrl: 'views/tooltipTemplate.html',
         restrict: 'E',
         link: function postLink(scope, elements) {
             
             var parent = $(elements[0]);
 
+            scope.dataService = dataService;
             //make responsive
             scope.$watch('height', function() {
                 parent.css('max-height', scope.height + 'px');

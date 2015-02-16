@@ -75,15 +75,93 @@ line.hidden {
     font-weight: 600;
 }
 
-accordion-group {
-    background: black;
+.tooltip-table {
+    margin: 0 5% 0 5%;
+    width: 90%;
+    border: none;
+    border-spacing: 0;
 }
 
-.accordion dd > a {
+.tooltip-table tr:nth-child(even) {
+    background-color: white;
+}
+
+.synergy-table tr td {
+    cursor: pointer;
+    color: #666666;
+    transition: color 0.25s;
+    -webkit-transition: color 0.25s;
+    -moz-transition: color 0.25s;
+    -o-transition: color 0.25s;
+    transition: background-color 0.1s;
+    -webkit-transition: background-color 0.1s;
+    -moz-transition: background-color 0.1s;
+    -o-transition: background-color 0.1s;
+}
+
+.synergy-table tr:hover td {
+    color: #111111;
+    background-color: #F9F9F9;
+}
+
+.tooltip-table td.data-key {
+    text-align: left;
+    color: #333333;
+    font-weight: bold; 
+    border-left: gray;
+
+}
+
+.tooltip-table td.data-value {
+    text-align: right;
+    color: #666666;
+
+}
+
+.accordion dd a {
     padding: 0.5em 1em 0.5em 1em;
     font-weight: lighter;
 }
 
+.accordion dd div.content {
+    
+}
+
+.tooltip-structure {
+    margin: -15px auto -15px auto;
+    display: block;
+    width: 10em;
+    height: 10em;
+}
+
+.tooltip-components-container {
+    text-align: center;
+}
+
+.tooltip-component-container {
+    color: #888888;
+    opacity: 0.6;
+    cursor: pointer;
+    display: inline-block;
+    width: 150px;
+    transition: opacity 0.25s;
+    -webkit-transition: opacity 0.25s;
+    -moz-transition: opacity 0.25s;
+    -o-transition: opacity 0.25s;
+}
+
+.tooltip-component-container:hover {
+    color: #111111;
+    opacity: 1.0;
+}
+
+.tooltip-component {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em;
+    height: 6em;
+}
 .tooltip-close {
     font-size: 14pt;
     position: absolute;
