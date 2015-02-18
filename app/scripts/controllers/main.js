@@ -12,6 +12,7 @@ angular.module('frontendApp')
 
     dataService.getExampleList().then(
         function () {
+            dataService.empty();
             $scope.datasets = dataService.exampleList;
         }
     );

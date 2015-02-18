@@ -7,20 +7,25 @@
  * # synergyMap
  */
 angular.module('frontendApp')
-  .directive('synergyMap', function () {
+  .directive('synergyMap', function ($compile) {
     
     function link(scope, elements) {
 
+      var xScale, yScale, activityScale, synergyScale;
 
+      console.log(scope.svgStyle)
+      var tip = d3.tip()
+                .attr('class', 'd3-tip')
+                .html(function(d) {return d.name});
       //setup
       var el = elements[0];
-
-      var activityScale, synergyScale;
-
+      
       var svg = d3.select(el)
                   .append('svg')
                   .attr({class: 'viz'})
                   .style(scope.svgStyle);
+
+      svg.call(tip);
 
       var g = svg.append('g'); // the zoom container
 
@@ -55,13 +60,12 @@ angular.module('frontendApp')
         if(typeof newData === 'undefined') {
           return;
         }
-        console.log(newData);
 
-        var xScale = d3.scale.linear()
+        xScale = d3.scale.linear()
                     .domain(d3.extent(newData.compounds, function(d) { return d.x; }))
                     .range([10, 90]);
 
-        var yScale = d3.scale.linear()
+        yScale = d3.scale.linear()
                     .domain(d3.extent(newData.compounds, function(d) { return d.y; }))
                     .range([10, 90]);
 
@@ -103,8 +107,8 @@ angular.module('frontendApp')
             .remove();
 
 
-        combinations.on('mouseover', function (combination) {
 
+        combinations.on('mouseover', function (combination) {
           d3.select(this).classed('highlighted', true);
           compounds.classed('highlighted', function(compound) {
             return compound === combination.source || compound === combination.target;
@@ -145,8 +149,10 @@ angular.module('frontendApp')
 
         compounds.exit()
               .remove();
-        
+
+
         compounds.on('mouseover', function (compound) {
+          tip.show(compound);
           d3.select(this).classed('highlighted', true);
           combinations.classed('highlighted', function(combination) {
             return combination.source === compound || combination.target === compound;
@@ -154,11 +160,15 @@ angular.module('frontendApp')
         });
 
         compounds.on('mouseout', function () {
+          tip.hide();
           d3.select(this).classed('highlighted', false);
           combinations.classed('highlighted', false);
         });
 
         compounds.on('click', function (compound) { 
+
+          tip.show(compound)
+
           if (compound === scope.selected) {
             scope.selected = null;
           } else {
