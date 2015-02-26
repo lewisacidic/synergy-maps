@@ -11,9 +11,9 @@ angular.module('frontendApp')
   .service('settings', function () {
 
     this.defaultColors = {
-        synergyColor: '#0000FF',
-        antagonismColor: '#FF0000'};
-
+        synergyColor: {r: 0, g: 0, b: 255},
+        antagonismColor: {r: 255, g: 0, b: 0}
+    };
 
     this.colors = $.extend(true, {}, this.defaultColors);
 
