@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: NavcontrollerCtrl', function () {
+describe('Controller: NavCtrl', function () {
 
   // load the controller's module
   beforeEach(module('frontendApp'));
@@ -11,12 +11,10 @@ describe('Controller: NavcontrollerCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    NavcontrollerCtrl = $controller('NavcontrollerCtrl', {
+    NavcontrollerCtrl = $controller('NavCtrl', {
       $scope: scope
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
-  });
+//test here
 });

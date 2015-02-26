@@ -17,7 +17,7 @@ angular.module('frontendApp')
     
     //list of examples
     dataService.exampleList = [];
-    dataService.model = {selected:null, highlighted: []}
+    dataService.model = {selected:null, highlighted: []};
     dataService.getExampleList = function(callback) {
       
       var delay = $q.defer();
@@ -113,7 +113,7 @@ angular.module('frontendApp')
       dataService.data.combinations.forEach(function(d) {
         d.value = d.synergies[newSynergyType];
         d.synergistic = d.value > 0;
-      })
+      });
 
     };
 
@@ -127,7 +127,7 @@ angular.module('frontendApp')
 
       dataService.data.compounds.forEach(function(d) {
         d.value = d.activities[newActivityType];
-      })
+      });
       
     };
 
@@ -183,7 +183,7 @@ angular.module('frontendApp')
       //
 
       this.data.metadata.dimensionalityReductionTypes.forEach(function(d) {
-        dataService.metadata[d.name] = d.metadata
+        dataService.metadata[d.name] = d.metadata;
       });
 
       this.setRepresentationType(this.available.representationTypes[0]);

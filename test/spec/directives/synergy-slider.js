@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: tooltip', function () {
+describe('Directive: synergySlider', function () {
 
   // load the directive's module
   beforeEach(module('frontendApp'));

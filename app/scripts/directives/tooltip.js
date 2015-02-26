@@ -10,8 +10,8 @@ angular.module('frontendApp')
   .directive('tooltip', function (dataService) {
 
     return {
-        scope: {visibility: '=', data: '=', height: '@', click: "="},
-        templateUrl: 'views/tooltipTemplate.html',
+        scope: {visibility: '=', data: '=', height: '@', click: '='},
+        templateUrl: 'views/tooltip.html',
         restrict: 'E',
         link: function postLink(scope, elements) {
             
@@ -25,16 +25,16 @@ angular.module('frontendApp')
 
             scope.close = function() {
                 scope.visibility = false;
-            }
+            };
 
 
-            scope.$watch('visibility', function(newVisibility, oldVisibility) {
+            scope.$watch('visibility', function(newVisibility) {
                 if (newVisibility) {
                     parent.show(400);
                 } else {
                     parent.hide(400);
-                };
-            })
+                }
+            });
 
 
         }

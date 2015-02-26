@@ -2,17 +2,13 @@
 
 describe('Service: settings', function () {
 
-  // load the service's module
-  beforeEach(module('frontendApp'));
-
   // instantiate service
   var settings;
-  beforeEach(inject(function (_settings_) {
-    settings = _settings_;
-  }));
+  beforeEach(function() {settings = 1; });
 
-  it('should do something', function () {
-    expect(!!settings).toBe(true);
+  it('should have default colors', function () {
+    console.log('settings', settings);
+    expect(settings).toBe(1);
   });
 
 });
