@@ -1,9 +1,10 @@
 .slider {
+    position: relative;
     z-index: 100;
     width: 342px;
     height: 17px;
-    top: 20px;
-    left: 20px;
+    top: 40px;
+    left: 40px;
     opacity: 0.8;
 }
 
@@ -24,8 +25,8 @@
 }
 
 .slider .left {
-    border-bottom-right-radius: 3px; 
-    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px; 
+    border-top-left-radius: 3px;
     padding-left: 2.5%;
     text-align: left;
     float:left;
