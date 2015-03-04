@@ -17,7 +17,7 @@ angular.module('frontendApp')
     
     //list of examples
     dataService.exampleList = [];
-    dataService.model = {selected:null, highlighted: []};
+    dataService.model = {selected: null, highlighted: []};
     dataService.getExampleList = function(callback) {
       
       var delay = $q.defer();

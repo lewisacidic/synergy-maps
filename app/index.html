@@ -28,10 +28,9 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/foundation/css/foundation.css" />
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="bower_components/angular-foundation-colorpicker/css/colorpicker.css" />
     <link rel="stylesheet" href="bower_components/sweetalert/lib/sweet-alert.css" />
     <link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.css" />
-    <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css" />
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -114,7 +113,7 @@
                   </a>
                   <ul top-bar-dropdown>
                     <li class="{{activityType === dataService.current.activityType ? 'active' : ''}}" 
-                        ng-repeat="activityType in dataService.available.activityTypes"|>
+                        ng-repeat="activityType in dataService.available.activityTypes">
                         <a ng-click="dataService.setActivityType(activityType)">
                           <span class="dropdown-name">{{activityType}}</span>
                           <span class="dropdown-info" ng-click="getInfo($event, activityType)"><fa name="info-circle"></fa></span>
@@ -184,7 +183,7 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/jquery-waypoints/waypoints.js"></script>
+    <script src="bower_components/waypoints/waypoints.js"></script>
     <script src="bower_components/SHA-1/sha1.js"></script>
     <script src="bower_components/angulartics/src/angulartics.js"></script>
     <script src="bower_components/angulartics/src/angulartics-adobe.js"></script>
