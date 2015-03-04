@@ -17,4 +17,6 @@ angular.module('frontendApp')
 
     this.colors = $.extend(true, {}, this.defaultColors);
 
+    this.combinationThickness = 20;
+    this.activityThickness = 20;
   });

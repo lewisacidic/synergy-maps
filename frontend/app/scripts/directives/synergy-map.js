@@ -230,8 +230,11 @@ angular.module('frontendApp')
         //watch the selected scope variable - this can be controlled from outside the directive or inside the directive
         scope.$watch('selected', function (selected) {
 
+          if (selected === undefined) {
+            return
+          }
           //if nothing is selected set the elements to not be selected
-          if (selected === null) {
+          else if (selected === null) {
             compounds.classed('selected', false);
             combinations.classed('selected', false);
           } else {

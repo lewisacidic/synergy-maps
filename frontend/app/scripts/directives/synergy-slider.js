@@ -139,8 +139,6 @@ angular.module('frontendApp')
                 .domain([scope.min, scope.max])
                 .range([0, 340]);
             
-            console.log(scope.min, scope.centerLimit, scope.max);
-            console.log(sliderScale(scope.min), sliderScale(scope.centerLimit), sliderScale(scope.max));
 
             slider.append([leftSection, rightSection, $('<svg class="axis"></svg>')]);
             rightLabel.appendTo(rightSection);
@@ -200,7 +198,6 @@ angular.module('frontendApp')
                     newCenterLimit = newValues[1],
                     newMax = newValues[2];
 
-                console.log(newMin, newCenterLimit, newMax);
                 scope.leftValue = 0.5 * (newCenterLimit + newMin);
                 scope.rightValue = 0.5 * (newCenterLimit + newMax);
 
