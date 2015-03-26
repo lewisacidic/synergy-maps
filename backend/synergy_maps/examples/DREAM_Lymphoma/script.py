@@ -60,8 +60,6 @@ def make_map():
  
     # activity types
 
-
-
     pIC20 = ActivityType(name='pIC20', metadata=
         """negative based-10 logarithm of the <a href="http://en.wikipedia.org/wiki/IC50">IC20</a>, the concentation of"""
         """compound required for 20% inhibition of growth of Lymphoma cells""")
@@ -71,10 +69,9 @@ def make_map():
         """compound required for 20% inhibition of growth of Lymphoma cells""")
 
     activity_types = [ pIC20, IC20 ]
-
+    
     # synergy types
 
-    sys.stdout.write('ExcessOverBliss')
     excessOverBliss = SynergyType(name='ExcessOverBliss', metadata=
         """Difference in observed vs expected activity of the component compounds,"""
         """each at the IC20 concentration (when known) assuming the <a href="http://doi.wiley.com/10.1111/j.1744-7348.1939.tb06990.x">Bliss Independence model</a>""")
