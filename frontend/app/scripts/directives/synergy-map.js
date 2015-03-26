@@ -102,6 +102,10 @@ angular.module('frontendApp')
                     .domain(d3.extent(newData.compounds, function(d) { return d.value; }))
                     .range([scope.activityThickness * 0.1, scope.activityThickness]);
 
+        console.log(d3.extent(newData.compounds, function(d) { return d.value; }));
+        console.log([scope.activityThickness * 0.1, scope.activityThickness]);
+        console.log(newData.compounds.map(activityScale));
+
         synergyScale = d3.scale.linear()
                     .domain(d3.extent(newData.combinations, function(d) { return Math.abs(d.value); }))
                     .range([0, scope.combinationThickness]);

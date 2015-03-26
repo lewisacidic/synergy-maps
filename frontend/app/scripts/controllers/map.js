@@ -15,6 +15,7 @@ angular.module('frontendApp')
 
     $scope.settings = settings;
 
+    console.log(angular.element($window).width(), angular.element($window).height()); 
     //set the positional style of the svg, allowing for responsiveness
     $scope.svgStyle = {position: 'absolute',
                   top: '45px',
