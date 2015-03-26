@@ -56,3 +56,6 @@ target/
 # PyCharm etc.
 .idea/*
 .idea/
+
+# Apache
+.htaccess
