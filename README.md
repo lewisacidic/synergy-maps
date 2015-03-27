@@ -1,2 +1,2 @@
-# Similarity Maps
-Similarity maps implementation in Python and Javascript.
+# Synergy Maps
+Synergy Maps implementation in Python and Javascript.
