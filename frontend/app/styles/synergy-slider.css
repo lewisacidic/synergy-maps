@@ -1,6 +1,6 @@
 .slider {
     position: relative;
-    z-index: 100;
+    z-index: 1;
     width: 342px;
     height: 17px;
     top: 40px;
@@ -12,14 +12,13 @@
     margin-top: 2px;
 }
 
-
 .ui-slider-range {
     background: white;
 }
 
 .slider .section {
     display: inline-block;
-    position: relative;
+    position: absolute;
     height: 100%;
     font-size: 10px;
 }
@@ -30,6 +29,14 @@
     padding-left: 2.5%;
     text-align: left;
     float:left;
+}
+
+.slider .right {
+    border-bottom-right-radius: 3px; 
+    border-top-right-radius: 3px;
+    padding-right: 2.5%;
+    text-align: right;
+    right: 0px;
 }
 
 .sm-label {
@@ -53,13 +60,7 @@
     opacity: 1.0;
 }
 
-.slider .right {
-    border-bottom-right-radius: 3px; 
-    border-top-right-radius: 3px;
-    padding-right: 2.5%;
-    text-align: right;
-    float:right;
-}
+
 
 svg.axis {
     position: absolute;
