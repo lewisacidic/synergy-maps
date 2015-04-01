@@ -34,11 +34,20 @@ angular.module('frontendApp')
   	//open the settings modal
 	  $scope.openSettings = function () {
 
-      console.log(dataService);
 	    $modal.open({
 	      templateUrl: 'views/settings.html',
 	      controller: 'SettingsCtrl'
 	      }
 	    );
   	};
+
+    //open the info modal
+    $scope.openInfo = function () {
+
+      $modal.open({
+        templateUrl: 'views/info.html',
+        controller: 'InfoCtrl'
+        }
+      );
+    };
   });
