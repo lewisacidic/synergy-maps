@@ -15,21 +15,6 @@ angular.module('frontendApp')
 
     $scope.settings = settings;
 
-    //set the positional style of the svg, allowing for responsiveness
-    $scope.svgStyle = {position: 'absolute',
-                  top: '45px',
-                  width:  angular.element($window).width(),
-                  height: angular.element($window).height() - 45
-              };
-
-    //bind function to screen resize event to make it responsive
-    $window.onresize = function() {
-        $scope.svgStyle.width = angular.element($window).width();
-        $scope.svgStyle.height = angular.element($window).height() - 45;
-        $scope.$apply();
-    };
-
-
     //selected information is currently nothing
     $scope.model = dataService.model;
 

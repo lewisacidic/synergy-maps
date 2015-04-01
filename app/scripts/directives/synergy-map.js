@@ -30,8 +30,7 @@ angular.module('frontendApp')
       //append the svg element
       var svg = d3.select(el)
                   .append('svg')
-                  .attr({class: 'viz'})
-                  .style(scope.svgStyle);
+                  .attr({class: 'viz'});
 
       //clicking anywhere should set selected to none.  This should default away if clicking on an object
       svg.on('click', function(){

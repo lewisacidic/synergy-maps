@@ -137,7 +137,7 @@ angular.module('frontendApp')
 
             var sliderScale = d3.scale.linear()
                 .domain([scope.min, scope.max])
-                .range([0, 340]);
+                .range([0, 280]);
             
 
             slider.append([leftSection, rightSection, $('<svg class="axis"></svg>')]);
@@ -148,7 +148,7 @@ angular.module('frontendApp')
             leftLabel.text(scope.leftName);
 
             rightSection.css({
-                'width': 340 - sliderScale(scope.centerLimit) + 'px',
+                'width': 280 - sliderScale(scope.centerLimit) + 'px',
                 'background': scope.rightColor,
 
 
@@ -203,9 +203,9 @@ angular.module('frontendApp')
 
                 sliderScale = d3.scale.linear()
                     .domain([newMin, newMax])
-                    .range([0, 340]);
+                    .range([0, 280]);
 
-                rightSection.css('width', 340 - sliderScale(scope.centerLimit) + 'px');
+                rightSection.css('width', 280 - sliderScale(scope.centerLimit) + 'px');
 
                 leftSection.css('width', sliderScale(scope.centerLimit) + 'px');
 

@@ -117,8 +117,7 @@
                     <li class="{{activityType === dataService.current.activityType ? 'active' : ''}}" 
                         ng-repeat="activityType in dataService.available.activityTypes">
                         <a ng-click="dataService.setActivityType(activityType)">
-                          <span class="dropdown-name">{{activityType}}</span>
-                          <span class="dropdown-info" ng-click="getInfo($event, activityType)"><fa name="info-circle"></fa></span>
+                          <span class="dropdown-name">{{activityType}}</span><span class="dropdown-info" ng-click="getInfo($event, activityType)"><fa name="info-circle"></fa></span>
                         </a>
                     </li>
                   </ul>
@@ -142,7 +141,16 @@
                   <i class="fa fa-loading" ng-show="loading"></i>
                 </li>
                 <li>
-                    <a ng-click="openSettings()"><fa name="cog"></fa> Settings</a>
+                  <a ng-click="openSettings()">
+                    <fa name="cog"></fa>
+                    <span class="icon-label">Settings</span>
+                  </a>
+                </li>
+                <li>
+                  <a ng-click="openInfo()">
+                    <fa name="info-circle"></fa>
+                    <span class="icon-label">Info</span>
+                  </a>
                 </li>
               </ul>
             </top-bar-section>
@@ -207,7 +215,6 @@
     <script src="bower_components/fastclick/lib/fastclick.js"></script>
     <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
     <script src="bower_components/jquery-placeholder/jquery.placeholder.js"></script>
-    <script src="bower_components/foundation/js/foundation.js"></script>
     <script src="bower_components/angular-foundation/mm-foundation-tpls.js"></script>
     <script src="bower_components/angular-fontawesome/dist/angular-fontawesome.js"></script>
     <script src="bower_components/angular-foundation-colorpicker/js/foundation-colorpicker-module.js"></script>
@@ -233,6 +240,7 @@
     <script src="scripts/controllers/map.js"></script>
     <script src="scripts/directives/tooltip.js"></script>
     <script src="scripts/directives/synergy-slider.js"></script>
+    <script src="scripts/controllers/info.js"></script>
     <!-- endbuild -->
   </body>
 </html>

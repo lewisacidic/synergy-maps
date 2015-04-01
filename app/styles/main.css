@@ -1,3 +1,5 @@
+/* Sorry, should have used sass!!! First time CSSing :(*/
+
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
 
 html, body, div, span, button, applet, object, iframe,
@@ -52,8 +54,20 @@ time, mark, audio, video {
 /* nav bar */
 .top-bar, .top-bar-section li:not(.has-form) a:not(.button), .top-bar-section .has-form, .top-bar-section .dropdown li:not(.has-form):not(.active) > a:not(.button) {
   background: #444;
-  min-width: 10em;
   }
+
+.top-bar-section .dropdown li:not(.has-form) a:not(.button):hover {
+  background: #363636;
+}
+
+.top-bar-section .dropdown li.active:not(.has-form) a:not(.button) {
+  background: #008CBA;
+}
+
+.top-bar-section .dropdown li.active:not(.has-form) a:not(.button):hover {
+  background: #007BA9;
+}
+
 
 .dropdown-type {
   opacity: 0.75;
@@ -64,9 +78,10 @@ time, mark, audio, video {
 }
 
 .dropdown-info {
+  position: absolute;
   z-index: 5;
   opacity: 0.6;
-  float: right;
+  right: 13px;
 }
 
 .dropdown-info:hover {
@@ -223,5 +238,60 @@ label {
   opacity: .5;
 }
 
+@media only screen and (min-width: 40.063em) and (max-width: 65em) { 
+
+  .top-bar-section .has-dropdown > a {
+    padding-right: 15px !important; 
+  }
+  .top-bar-section .has-dropdown > a::after {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 40.063em) and (max-width: 60em) {
+  .icon-label {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 40.063em) and (max-width: 56em) {
+  input[type="text"].dream-search {
+    width: 7em;
+  }
+}
+
+@media only screen and (min-width: 40.063em) and (max-width: 51em) {
+  .top-bar .name h1 a {
+    padding: 0 0 0 0;
+  }
+}
+
+@media only screen and (min-width: 40.063em) and (max-width: 49em) {
+  .top-bar .name {
+    display: none;
+  }
+}
 
 
+.top-bar .toggle-topbar.menu-icon {
+  top: 22px;
+}
+
+.top-bar .toggle-topbar a {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.top-bar.expanded .toggle-topbar a {
+  color: #FFF;
+}
+.top-bar .name h1 a {
+  width:100%;
+}
+nav.top-bar.expanded {
+  background: #393939;
+}
