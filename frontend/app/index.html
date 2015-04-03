@@ -40,8 +40,10 @@
     <link rel="stylesheet" href="styles/synergy-map.css" />
     <link rel="stylesheet" href="styles/synergy-slider.css" />
     <link rel="stylesheet" href="styles/tooltip.css" />
+    <link rel="stylesheet" href="styles/info.css" />
     <!-- endbuild -->
   </head>
+
   <body ng-app="frontendApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -50,119 +52,121 @@
     <!-- Add your site or application content here -->
 
     <div id="wrapper">
+      <div id="nav" ng-controller="NavCtrl">
+        <top-bar is-hover>
+          <ul class="left">
+            <li class="name">
+              <h1><a href="#/">Synergy Maps</a></h1>
+            </li>
+            <li toggle-top-bar class="menu-icon">
+              <a>Menu</a>
+            </li>
+          </ul>
 
-        <div id="nav" ng-controller="NavCtrl">
-          <top-bar is-hover>
-            <ul class="left">
-              <li class="name">
-                <h1><a href="#/">Synergy Maps</a></h1>
+          <top-bar-section>
+            <!-- Right Nav Section -->
+            <ul class="right">
+              <li has-dropdown>
+                <a>
+                  <div class="dropdown-type">Representation Type</div>
+                  <div class="dropdown-value">{{dataService.current.representationType}}</div>
+                </a>
+                <ul top-bar-dropdown>
+                  <li class="{{representationType === dataService.current.representationType ? 'active' : ''}}" 
+                      ng-repeat="representationType in dataService.available.representationTypes">
+                      <a ng-click="dataService.setRepresentationType(representationType)">
+                        <span class="dropdown-name">{{representationType | truncate : 12 : '...'}}</span>
+                        <span class="dropdown-info" ng-click="getInfo($event, representationType)">
+                          <fa name="info-circle"></fa>
+                        </span>
+                      </a>
+                  </li>
+                </ul>
               </li>
-              <li toggle-top-bar class="menu-icon"><a>Menu</a></li>
+              <li has-dropdown>
+                <a>
+                  <div class="dropdown-type">Reduction Type</div>
+                  <div class="dropdown-value">{{dataService.current.dimensionalityReductionType}}</div>
+                </a>
+                <ul top-bar-dropdown>
+                  <li class="{{dimensionalityReductionType === dataService.current.dimensionalityReductionType ? 'active' : ''}}" 
+                      ng-repeat="dimensionalityReductionType in dataService.available.dimensionalityReductionTypes">
+                      <a ng-click="dataService.setDimensionalityReductionType(dimensionalityReductionType)">
+                        <span class="dropdown-name">{{dimensionalityReductionType | truncate : 12 : '...'}}</span>
+                        <span class="dropdown-info" ng-click="getInfo($event, dimensionalityReductionType)"><fa name="info-circle"></fa></span>
+                      </a>
+                  </li>
+                </ul>
+              </li>
+              <li has-dropdown>
+                <a>
+                  <div class="dropdown-type">Synergy Metric</div>
+                  <div class="dropdown-value">{{dataService.current.synergyType}}</div>
+                </a>
+                <ul top-bar-dropdown>
+                  <li class="{{synergyType === dataService.current.synergyType ? 'active' : ''}}" 
+                      ng-repeat="synergyType in dataService.available.synergyTypes">
+                      <a ng-click="dataService.setSynergyType(synergyType)">
+                        <span class="dropdown-name">{{synergyType | truncate : 12 : '...'}}</span>
+                        <span class="dropdown-info" ng-click="getInfo($event, synergyType)"><fa name="info-circle"></fa></span>
+                      </a>
+                  </li>
+                </ul>
+              </li>
+              <li has-dropdown>
+                <a>
+                  <div class="dropdown-type">Activity Metric</div>
+                  <div class="dropdown-value">{{dataService.current.activityType | truncate : 12 : '...'}}</div>
+                </a>
+                <ul top-bar-dropdown>
+                  <li class="{{activityType === dataService.current.activityType ? 'active' : ''}}" 
+                      ng-repeat="activityType in dataService.available.activityTypes">
+                      <a ng-click="dataService.setActivityType(activityType)">
+                        <span class="dropdown-name">{{activityType}}</span><span class="dropdown-info" ng-click="getInfo($event, activityType)"><fa name="info-circle"></fa></span>
+                      </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="has-form">
+                <fa name="search" class="magnifying-glass"></fa>
+                <script type="text/ng-template" id="customTemplate.html">
+                  <a class="typeahead-item">
+                      <img ng-src="data/images/{{match.model.id}}-{{match.label}}.svg" width="32">
+                      <div class="typeahead-label" bind-html-unsafe="match.label | truncate:15:'...' | typeaheadHighlight:query"></div>
+                      <div class="typeahead-id" bind-html-unsafe="match.model.id"></div>
+                  </a>
+                </script>
+                <input class="dream-search" type="text" 
+                        ng-model="currentSearch"
+                        typeahead='compound as compound.name for compound in dataService.data.compounds | filter:$viewValue | limitTo:8'  
+                        placeholder="Search" class="form-control" 
+                        typeahead-on-select="select($item)"
+                        typeahead-loading="loading"
+                        typeahead-template-url="customTemplate.html">
+                <i class="fa fa-loading" ng-show="loading"></i>
+              </li>
+              <li>
+                <a ng-click="openSettings()">
+                  <fa name="cog"></fa>
+                  <span class="icon-label">Settings</span>
+                </a>
+              </li>
+              <li>
+                <a ng-click="openInfo()">
+                  <fa name="info-circle"></fa>
+                  <span class="icon-label">Info</span>
+                </a>
+              </li>
             </ul>
+          </top-bar-section>
+        </top-bar>   
+      </div>
 
-            <top-bar-section>
-              <!-- Right Nav Section -->
-              <ul class="right">
-                <li has-dropdown>
-                  <a>
-                    <div class="dropdown-type">Representation Type</div>
-                    <div class="dropdown-value">{{dataService.current.representationType}}</div>
-                  </a>
-                  <ul top-bar-dropdown>
-                    <li class="{{representationType === dataService.current.representationType ? 'active' : ''}}" 
-                        ng-repeat="representationType in dataService.available.representationTypes">
-                        <a ng-click="dataService.setRepresentationType(representationType)">
-                          <span class="dropdown-name">{{representationType | truncate : 12 : '...'}}</span>
-                          <span class="dropdown-info" ng-click="getInfo($event, representationType)"><fa name="info-circle"></fa></span>
-                        </a>
-                    </li>
-                  </ul>
-                </li>
-                <li has-dropdown>
-                  <a>
-                    <div class="dropdown-type">Reduction Type</div>
-                    <div class="dropdown-value">{{dataService.current.dimensionalityReductionType}}</div>
-                  </a>
-                  <ul top-bar-dropdown>
-                    <li class="{{dimensionalityReductionType === dataService.current.dimensionalityReductionType ? 'active' : ''}}" 
-                        ng-repeat="dimensionalityReductionType in dataService.available.dimensionalityReductionTypes">
-                        <a ng-click="dataService.setDimensionalityReductionType(dimensionalityReductionType)">
-                          <span class="dropdown-name">{{dimensionalityReductionType | truncate : 12 : '...'}}</span>
-                          <span class="dropdown-info" ng-click="getInfo($event, dimensionalityReductionType)"><fa name="info-circle"></fa></span>
-                        </a>
-                    </li>
-                  </ul>
-                </li>
-                <li has-dropdown>
-                  <a>
-                    <div class="dropdown-type">Synergy Metric</div>
-                    <div class="dropdown-value">{{dataService.current.synergyType}}</div>
-                  </a>
-                  <ul top-bar-dropdown>
-                    <li class="{{synergyType === dataService.current.synergyType ? 'active' : ''}}" 
-                        ng-repeat="synergyType in dataService.available.synergyTypes">
-                        <a ng-click="dataService.setSynergyType(synergyType)">
-                          <span class="dropdown-name">{{synergyType | truncate : 12 : '...'}}</span>
-                          <span class="dropdown-info" ng-click="getInfo($event, synergyType)"><fa name="info-circle"></fa></span>
-                        </a>
-                    </li>
-                  </ul>
-                </li>
-                <li has-dropdown>
-                  <a >
-                    <div class="dropdown-type">Activity Metric</div>
-                    <div class="dropdown-value">{{dataService.current.activityType | truncate : 12 : '...'}}</div>
-                  </a>
-                  <ul top-bar-dropdown>
-                    <li class="{{activityType === dataService.current.activityType ? 'active' : ''}}" 
-                        ng-repeat="activityType in dataService.available.activityTypes">
-                        <a ng-click="dataService.setActivityType(activityType)">
-                          <span class="dropdown-name">{{activityType}}</span><span class="dropdown-info" ng-click="getInfo($event, activityType)"><fa name="info-circle"></fa></span>
-                        </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="has-form">
-                  <fa name="search" class="magnifying-glass"></fa>
-                  <script type="text/ng-template" id="customTemplate.html">
-                    <a class="typeahead-item">
-                        <img ng-src="data/images/{{match.model.id}}-{{match.label}}.svg" width="32">
-                        <div class="typeahead-label" bind-html-unsafe="match.label | truncate:15:'...' | typeaheadHighlight:query"></div>
-                        <div class="typeahead-id" bind-html-unsafe="match.model.id"></div>
-                    </a>
-                  </script>
-                  <input class="dream-search" type="text" 
-                          ng-model="currentSearch"
-                          typeahead='compound as compound.name for compound in dataService.data.compounds | filter:$viewValue | limitTo:8'  
-                          placeholder="Search" class="form-control" 
-                          typeahead-on-select="select($item)"
-                          typeahead-loading="loading"
-                          typeahead-template-url="customTemplate.html">
-                  <i class="fa fa-loading" ng-show="loading"></i>
-                </li>
-                <li>
-                  <a ng-click="openSettings()">
-                    <fa name="cog"></fa>
-                    <span class="icon-label">Settings</span>
-                  </a>
-                </li>
-                <li>
-                  <a ng-click="openInfo()">
-                    <fa name="info-circle"></fa>
-                    <span class="icon-label">Info</span>
-                  </a>
-                </li>
-              </ul>
-            </top-bar-section>
-          </top-bar>   
-        </div>
-
-        <div id="content" ng-view="">
-        </div>
+      <div id="content" ng-view=""></div>
 
     </div>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
+    <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)

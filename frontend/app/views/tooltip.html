@@ -23,7 +23,7 @@
         </table>
     </accordion-group>
 
-    <accordion-group ng-show="true" is-open="propertiesIsOpen" ng-init="propertiesIsOpen = true">
+    <accordion-group ng-show="true" is-open="propertiesIsOpen" ng-init="propertiesIsOpen = false">
         <accordion-heading>
             <span>properties</span>
             <i class="tooltip-accordion-toggle" ng-class="{'fa fa-chevron-down': propertiesIsOpen, 'fa fa-chevron-right': !propertiesIsOpen}"></i>
@@ -31,7 +31,8 @@
         <table class="tooltip-table">
            <tr ng-repeat="(property, value) in data.object.properties">
                 <td class="data-key">{{property}}</td>
-                <td class="data-value">{{value | number:4}}</td>
+                <td ng-show="angular.isNumber(value)" class="data-value">{{value | number:4}}</td>
+                <td ng-hide="angular.isNumber(value)" class="data-value">{{value}}</td>
             </tr>
         </table>
     </accordion-group>
@@ -43,7 +44,7 @@
         </accordion-heading>
         <table class="tooltip-table synergy-table">
             <tr ng-click="click(combination)" ng-repeat="combination in data.neighbors | orderBy:'-value'" ng-init="pairedCompound = combination.source === data.object ? combination.target : combination.source">
-                <td><img width="44" ng-src="data/images/{{pairedCompound.id}}-{{pairedCompound.name}}.svg" /></td>
+                <td class="compound-image-thumbnail"><img width="44" ng-src="data/images/{{pairedCompound.id}}-{{pairedCompound.name}}.svg?decache=42" /></td>
                 <td>{{pairedCompound.name}}</td>
                 <td>{{combination.value | number:4}}</td>
             </tr>
@@ -58,12 +59,12 @@
         <div class="tooltip-components-container">
             <div class="tooltip-component-container" ng-click="click(data.object.source)">
                 <img  class="tooltip-component" 
-                    ng-src="data/images/{{data.object.source.id}}-{{data.object.source.name}}.svg">
+                    ng-src="data/images/{{data.object.source.id}}-{{data.object.source.name}}.svg?decache=12">
                 <span class="tooltip-label">{{data.object.source.name}}</span>
             </div>
             <div class="tooltip-component-container" ng-click="click(data.object.target)">
                 <img class="tooltip-component" 
-                    ng-src="data/images/{{data.object.target.id}}-{{data.object.target.name}}.svg">
+                    ng-src="data/images/{{data.object.target.id}}-{{data.object.target.name}}.svg?decache=12">
                 <span class="tooltip-label">{{data.object.target.name}}</span>
             </div>
         </div>
@@ -79,12 +80,13 @@
         </table>
     </accordion-group>
 
-    <accordion-group ng-show="Object.keys(data.object.properties).length == 0" is-open="propertiesIsOpen" ng-init="propertiesIsOpen = Object.keys(data.object.properties).length == 0">
+    <accordion-group ng-show="true" is-open="propertiesIsOpen" ng-init="propertiesIsOpen = false">
         <accordion-heading>properties<i class="tooltip-accordion-toggle" ng-class="{'fa fa-chevron-down': propertiesIsOpen, 'fa fa-chevron-right': !propertiesIsOpen}"></i></accordion-heading>
         <table class="tooltip-table">
             <tr ng-repeat="(property, value) in data.object.properties">
                 <td class="data-key">{{property}}</td>
-                <td class="data-value">{{value | number:4}}</td>
+                <td ng-show="angular.isNumber(value)" class="data-value">{{value | number:4}}</td>
+                <td ng-hide="angular.isNumber(value)" class="data-value">{{value}}</td>
             </tr>
         </table>
     </accordion-group>

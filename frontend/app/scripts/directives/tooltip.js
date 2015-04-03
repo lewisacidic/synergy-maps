@@ -18,10 +18,6 @@ angular.module('frontendApp')
             var parent = $(elements[0]);
 
             scope.dataService = dataService;
-            //make responsive
-            scope.$watch('height', function() {
-                parent.css('max-height', scope.height + 'px');
-            });
 
             scope.close = function() {
                 scope.visibility = false;

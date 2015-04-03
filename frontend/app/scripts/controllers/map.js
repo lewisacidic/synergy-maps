@@ -8,7 +8,7 @@
  * Controller of the frontendApp
  */
 angular.module('frontendApp')
-  .controller('MapCtrl', function ($scope, $routeParams, dataService, settings, $window) {
+  .controller('MapCtrl', function ($scope, $routeParams, dataService, settings) {
 
     //locate database from the route
     $scope.datasetName = $routeParams.dataset;
