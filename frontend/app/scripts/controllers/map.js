@@ -67,6 +67,13 @@ angular.module('frontendApp')
   
     $scope.slider = {min: -1, leftValue:-0.5, centerLimit: 0, rightValue: 0.5, max: 1};
 
+    $scope.saveSVG = function () {
+      (function () { 
+      var e = document.createElement('script'); 
+      e.setAttribute('src', 'scripts/svg-crowbar.js'); 
+      e.setAttribute('class', 'svg-crowbar'); document.body.appendChild(e); })();
+    };
+
     dataService.loadExample($routeParams.dataset, function() {
         $scope.data = dataService.data;
         var extent = d3.extent($scope.data.combinations, function(d) { return d.value; });
