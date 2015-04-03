@@ -68,13 +68,6 @@ angular.module('frontendApp')
       //call the zoom listener on the svg
       zoomListener(svg);
 
-      scope.$watch('svgStyle', function (newSvgStyle) {
-        svg.style(newSvgStyle);
-      }, true);
-
-
-      //watch data
-
       //update data
       scope.$watch('[data, synergyColor, antagonismColor]', function (newObjects) {
         
@@ -230,7 +223,7 @@ angular.module('frontendApp')
         scope.$watch('selected', function (selected) {
 
           if (selected === undefined) {
-            return
+            return;
           }
           //if nothing is selected set the elements to not be selected
           else if (selected === null) {

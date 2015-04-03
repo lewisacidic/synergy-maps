@@ -49,6 +49,7 @@
 .synergy-table tr td {
     cursor: pointer;
     color: #666666;
+    max-width: 120px;
     transition: color 0.25s;
     -webkit-transition: color 0.25s;
     -moz-transition: color 0.25s;
@@ -57,6 +58,14 @@
     -webkit-transition: background-color 0.1s;
     -moz-transition: background-color 0.1s;
     -o-transition: background-color 0.1s;
+}
+
+.compound-image-thumbnail {
+    padding: 0.25em;
+}
+
+.accordion dd > .content {
+    padding: 0.4em;
 }
 
 .synergy-table tr:hover td {
@@ -88,7 +97,7 @@
 }
 
 .tooltip-structure {
-    margin: -15px auto -15px auto;
+    margin: -5px auto -5px auto;
     display: block;
     width: 10em;
     height: 10em;

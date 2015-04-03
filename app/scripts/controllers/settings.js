@@ -30,16 +30,13 @@ angular.module('frontendApp')
     $scope.$watch('colors', function(newColors) {
         settings.colors.antagonismColor = string2rgb(newColors.antagonismColor);
         settings.colors.synergyColor = string2rgb(newColors.synergyColor);
-        console.log(settings.colors);
     }, true);
 
-    $scope.colorBlindMode = function () {
-        settings.colors.antagonismColor = 'rgb(255,255,255)';
-        settings.colors.synergyColor = 'rgb(100,100,100)';
-    };
-
     $scope.reset = function () {
-        settings.colors = settings.defaultColors;
+        $scope.colors = {
+        antagonismColor: rgb2string(settings.defaultColors.antagonismColor),
+        synergyColor: rgb2string(settings.defaultColors.synergyColor)
+        };
     };
 
     $scope.dismiss = function () {
