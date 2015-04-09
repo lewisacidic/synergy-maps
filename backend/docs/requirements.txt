@@ -1,2 +1,7 @@
 sphinx==1.2
 sphinxcontrib-napoleon
+scikit-learn
+pandas
+tsne
+json
+networkx

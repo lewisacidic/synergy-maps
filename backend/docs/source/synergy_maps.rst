@@ -35,5 +35,3 @@ synergy_maps.types module
     :members:
     :undoc-members:
     :show-inheritance:
-
-
