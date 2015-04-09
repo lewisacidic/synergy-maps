@@ -1,6 +1,14 @@
 synergy_maps package
 ====================
 
+Module contents
+---------------
+
+.. automodule:: synergy_maps
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 Submodules
 ----------
 
@@ -29,10 +37,3 @@ synergy_maps.types module
     :show-inheritance:
 
 
-Module contents
----------------
-
-.. automodule:: synergy_maps
-    :members:
-    :undoc-members:
-    :show-inheritance:
