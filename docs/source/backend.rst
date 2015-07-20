@@ -4,13 +4,23 @@ Backend
 The backend is written in `Python`, and is where data is processed into the JSON
 representation. The API is detailed in :doc:`API`.
 
+Installation
+------------
+
+Change into the backend directory and run the `setup.py` script.
+
+.. code-block:: bash
+
+    $ python setup.py install
+
 Quickstart
 ----------
 
-A prebuilt script for analysing pairwise combination data in a standard format are
-provided in the ``scripts`` folder.  These provide minimum functionality, but the
-software is designed for extensibility, so consider writing your own script using
-the example datasets inluded in ``backend/synergy_maps/examples/``.
+A prebuilt script, ``synergy_map.py`` for analysing pairwise combination data
+in a standard format is provided in the ``scripts`` folder.  This provides
+minimum functionality - the software is designed for extensibility,
+so consider writing your own script such as those in the example datasets
+inluded in ``backend/synergy_maps/examples/``.
 
 The script can be run using:
 
