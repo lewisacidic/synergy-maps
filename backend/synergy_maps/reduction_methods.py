@@ -8,9 +8,6 @@
 # pylint: disable=too-few-public-methods
 
 """
-synergy_maps.reduction_methods
-------------------------------
-
 a module for providing wrappers or implementations of reduction methods
 to be used in the synergy maps.
 """
@@ -34,7 +31,7 @@ class TSNE(object):
         self.perplexity = perplexity
         self.theta = theta
 
-    def fit_transform(self, x_in, suppress=False):
+    def fit_transform(self, x_in, suppress=True):
         """ fit to data, and return the transform
 
         Args:
@@ -42,10 +39,9 @@ class TSNE(object):
                 Shape of m x n, where m is the number of compounds
                 and n is the size of features.
             suppress (bool, optional): Whether to output debug info.
-                Defaults to false
-
+                Defaults to faldse
         Returns:
-            numpy.array:
+            numpy.array: A m x 2 array of coordinates positioned in 2D space.
 
         """
         if suppress:

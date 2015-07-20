@@ -5,7 +5,9 @@
 
 # -*- coding: utf-8 -*-
 
-"""Package implementing constructing synergy map datasets."""
+"""Package implementing constructing synergy map datasets.
+
+This is the default namespace, and imports all the relevant classes."""
 
 from .synergy_map import SynergyMap
 from .types import (

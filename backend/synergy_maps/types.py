@@ -7,8 +7,7 @@
 
 # pylint: disable=too-few-public-methods
 
-"""synergy_maps.types
-
+"""
 Module defining the types of representations, reductions, activities and
 synergies to be used in a synergy map.
 
@@ -18,7 +17,7 @@ Finally, default types are implemented.
 import pandas as pd
 import skchem
 from synergy_maps.reduction_methods import TSNE
-from skchem.fingerprints import skchemize
+from skchem.descriptors import skchemize
 from skchem.target_prediction import PIDGIN
 from rdkit.Chem.rdMolDescriptors import GetMorganFingerprintAsBitVect as morg
 from sklearn.decomposition import PCA
@@ -216,20 +215,19 @@ morg2 = RepresentationType(name='morg2',
 
 targets = RepresentationType(name='targets',
     representation_func=PIDGIN(),
-    metadata="""Bayes affinity fingerprint for 1080 human targets, produced """ 
+    metadata="""Bayes affinity fingerprint for 1080 human targets, produced """
     """using the <a href="https://github.com/lhm30/PIDGIN">PIDGIN (Prediction of targets IncluDinG INactives)</a>"""
     """Target Prediction algorithm, implemented in <a href="https://github.com/richlewis42/scikit-chem">scikit-chem</a>.""")
 
 random = RepresentationType(name='random',
     representation_func=lambda m: pd.Series(np.random.random(100)),
-    metadata="""Uniformly distributed random feature vector of length 100""" 
+    metadata="""Uniformly distributed random feature vector of length 100"""
     """implemented using <a href="http://www.numpy.org">numpy</a> <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.random.random.html#numpy.random.random">random</a> module""")
 
 DEFAULT_REPRESENTATION_TYPES = [morg2, targets, random]
 
-
-pca = ReductionMethod(name='PCA',  
-    model=PCA(n_components=2), 
+pca = ReductionMethod(name='PCA',
+    model=PCA(n_components=2),
     metadata="""<a href="http://en.wikipedia.org/wiki/Principal_component_analysis">Principal component analysis</a> implemented in <a href="http://scikit-learn.org/stable/" target="_blank">scikit-learn</a>\n"""
     """<br/>Default parameters used.""")
 
@@ -247,4 +245,3 @@ tsne = ReductionMethod(name='t-SNE',
         """<br/>Parameters used: Perplexity = 10, theta=0""")
 
 DEFAULT_REDUCTION_METHODS = [pca, mds, tsne]
-

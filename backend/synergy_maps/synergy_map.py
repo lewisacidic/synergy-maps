@@ -7,11 +7,7 @@
 
 # pylint: disable=too-many-instance-attributes,too-many-arguments
 
-"""
-synergy_maps.synergy_map
-
-Module implementing the creation of synergy map objects.
-"""
+""" Module implementing the creation of synergy map objects. """
 
 from collections import defaultdict
 from rdkit.Chem.Draw import MolToFile
@@ -72,9 +68,6 @@ class SynergyMap(object):
 
         """Draw the metadata out of all objects, to make single metadata object
 
-        Args:
-            None
-
         Returns:
             dict: dictionary for the different types of metadata.
 
@@ -98,9 +91,6 @@ class SynergyMap(object):
         reduction method, applying them and saving the resultant dataframes
         in the coordinates dictionary.
 
-        Args:
-            None
-
         Returns:
             dict: multi level dict of coordinates
                 dict -> rep -> red -> (x, y)
@@ -114,9 +104,6 @@ class SynergyMap(object):
     def generate_graph(self):
 
         """create networkX graph for the dataset
-
-        Args:
-            None
 
         Returns:
             graph (networkx.Graph) the graph object for the dataset."""
@@ -139,9 +126,6 @@ class SynergyMap(object):
         Notes:
             It is expected that the user has installed an svg capable
             renderer for rdkit.  See http://www.rdkit.org for details.
-
-        Args:
-            None
 
         Returns:
             None
@@ -167,9 +151,6 @@ class SynergyMap(object):
     def to_json(self):
 
         """Generate a JSON representation from the constructed Synergy Map.
-
-        Args:
-            None
 
         Returns:
             str: a string containing the json.

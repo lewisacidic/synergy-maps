@@ -13,13 +13,14 @@ class TestRepresentationType(TestCase):
 
     def test_representation_data_and_func(self):
 
-        """ Test that a representation cannot be made with both data 
+        """ Test that a representation cannot be made with both data
         and a generating function"""
 
         with self.assertRaises(AssertionError):
-            synergy_maps.RepresentationType(representation_func=True, 
+            synergy_maps.RepresentationType(representation_func=True,
                                             data=True)
 
 class TestReductionMethod(TestCase):
 
+    # TODO
     pass
