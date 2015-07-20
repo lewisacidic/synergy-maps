@@ -20,6 +20,7 @@ Contents
    backend
    documentation
    git-structure
+   API
 
 Indices and tables
 ==================
